@@ -338,4 +338,85 @@
 
 
 
+// 즉시실행함수 (IIFE, Immediately Invoked Function Expression)
 
+// const a = 7
+
+// const double = () => {
+//     console.log(a * 2)
+// }
+// double()
+
+// ;(() => {
+//     console.log(a * 2)
+// }) ()
+
+// ;(() => {})() // (F)()
+// ;(function () {})() // (F)()
+// ;(function () {}()) // (F())
+// ;!function () {}() // !F()
+// ;+function () {}() // +F()
+
+// ;((a, b) => {
+//     console.log(a.innerWidth)
+//     console.log(b.body)
+// }) (window, document)
+
+
+
+// // 콜백함수 (Callback Function)
+
+// const a = callback => {
+//     callback()
+//     console.log('A')
+// }
+// const b = () => {
+//     console.log('B')
+// }
+
+// a(b)
+
+
+// 재귀함수 (Recursive Function)
+
+// const a = () => {
+//     console.log('A')
+//     a()
+// }
+
+// a()
+
+
+// this 키워드
+//// 일반 함수의 this는 호출 위치에서 정의
+//// 화살표 함수의 this는 자신이 선언된 함수 ( 렉시컬 ) 범위에서 정의
+
+// const user = {
+//     firstName: 'Heropy',
+//     lastName: 'Park',
+//     age: 85,
+//     getFullName: function () {
+//         return `${this.firstName} ${this.lastName}` // this 키워드는 함수가 속한 객체를 가리킴
+//     }
+// }
+
+// console.log(user.getFullName())
+
+
+
+function user() {
+    this.firstName = 'Neo'
+    this.lastName = 'Anderson'
+
+return {
+    firstName: 'Heropy',
+    lastName: 'Park',
+    age: 85,
+    getFullName: () => {
+        return `${this.firstName} ${this.lastName}` // this 키워드는 함수가 속한 객체를 가리킴
+    }
+}
+}
+
+const u = user()
+console.log(u.getFullName())
