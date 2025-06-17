@@ -404,19 +404,86 @@
 
 
 
-function user() {
-    this.firstName = 'Neo'
-    this.lastName = 'Anderson'
+// function user() {
+//     this.firstName = 'Neo'
+//     this.lastName = 'Anderson'
 
-return {
-    firstName: 'Heropy',
-    lastName: 'Park',
-    age: 85,
-    getFullName: () => {
-        return `${this.firstName} ${this.lastName}` // this 키워드는 함수가 속한 객체를 가리킴
-    }
-}
+// return {
+//     firstName: 'Heropy',
+//     lastName: 'Park',
+//     age: 85,
+//     getFullName: () => {
+//         return `${this.firstName} ${this.lastName}` // this 키워드는 함수가 속한 객체를 가리킴
+//     }
+// }
+// }
+
+// const u = user()
+// console.log(u.getFullName())
+
+
+// const score = 100;
+
+
+// if(score >= 90) {
+//     console.log('A');
+// } else if (score >= 80 && score < 90) {
+//     console.log('B');
+// } else if (score >= 70 && score < 80) {
+//     console.log('C');
+// } else if (score >= 60 && score < 70) {
+//     console.log('D');
+// } else { 
+//     console.log('F');
+// }
+// console.log(score);
+
+
+
+
+// let score = 100;
+// let grade = '';
+
+// if (90 <= score && score <= 100) {
+//   grade = "A";
+// } else if (80 <= score && score <= 89) {
+//   grade = "B";
+// } else if (70 <= score && score <= 79) {
+//   grade = "C";
+// } else if (60 <= score && score <= 69) {
+//   grade = "D";
+// } else {
+//    console.log('F');
+// }
+// console.log(grade);
+
+
+
+// score = int(input())
+
+// if 90 <= score <= 100:
+//     print("A")
+// elif 80 <= score <= 89:
+//     print("B")
+// elif 70 <= score <= 79:
+//     print("C")
+// elif 60 <= score <= 69:
+//     print("D")
+// else:  # score < 60
+//     print("F")
+
+
+let a = 10;
+let b = 10000;
+let nice = ''
+
+if ( a > b) {
+    nice = '>'
+}else if ( a < b ) {
+    nice = '<'
+}else {
+    nice = '='
 }
 
-const u = user()
-console.log(u.getFullName())
+console.log(nice)
+
