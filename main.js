@@ -1247,3 +1247,431 @@
 // }
 // timer.timout ( )                     //  TIMER!
 
+// ** prototype **
+
+// 설명 
+// 1. 자바스크립트는 정확하게 클래스 기반 언어가 아니고 프로토타입 기반 언어다.
+// 2. prototype은 new 키워드로 만들어진 생성자 함수에서 반환된 결과, 즉 instance에서 쓸  수 있는 별도의 속성이나 메소드를 등록하는 객체를 말한다.
+
+
+// const fruits = [ ‘Apple’, ‘Banana’, ‘Cherry’ ]
+
+// const fruits = new Array ( ‘Apple’, ‘Banana’, ‘Cherry’ )  ->결과적으로 생성자함수에서 반환된 하나의
+//                                                                                                                 instance라고 볼 수 있다.
+
+// console.log( fruits )                                              //  [ ‘Apple’, ‘Banana’, ‘Cherry’ ]
+// console.log( fruits.length )                                //  3
+// console.log( fruits.includes ( ‘Banana’ ) )    // true
+// console.log( fruits.includes ( ‘Orange’ ) )    // false
+
+
+// includes : 데이터 중에 찾고자 하는 데이터가 있는지 확인 할 수 있는 키워드함수
+
+
+
+
+//  instance : new 키워드로 생성자 함수로서 실행되고 반환이 되는 결과를 instance라고 부른다.
+
+
+
+// @ 위 코드 prototype 예제
+
+// Array.prototype.heropy = function ( ) {
+//    console.log( this )
+//  }
+
+
+// fruits.heropy ( )                                               //  [ ‘Apple’, ‘Banana’, ‘Cherry’ ]
+
+
+// const arr = [ ]
+// arr.heropy ( )
+
+
+// -prototype 속성에서 인위적으로 만드는 어떠한 메소드는 기본적으로 펑션 키워드를 일반 함수로 써주면 된다.
+
+
+
+// @ prototype 2번째 예제
+
+
+// const heropy = {
+//    firstName: ‘Heropy’ ,
+//    lastName: ‘Park’ ,
+//    getFullName ( ) { 
+//        return ` ${ this. firstName }  ${ this . lastName }` - - - - - - > 프로토타입 메소드
+//    } 
+// }
+// const neo = {
+//       firstName: ’Neo’ ,
+//       lastName: ‘Anderson’,
+//       getFullName ( ) { 
+//        return ` ${ this. firstName }  ${ this . lastName }`    - - - - - - > 프로토타입 메소드
+//    } 
+// }
+// console.log( heropy.getFullName ( ) )                                         // Heropy Park
+// console.log( heropy.getFullName.call ( neo ) )                        // Neo Anderson
+
+
+
+
+// @ 위 코드 2번째 prototype 타입 변경
+
+
+// function User ( first, last ) {
+//     this.firstName = first
+//     this.lastName = last
+// }
+// User.prototype. getFullName = function ( ) { 
+//    return ` ${ this. firstName }  ${ this . lastName }`  - - - - - - > 프로토타입 메소드
+// }
+
+
+// const heropy = new User ( ‘ Heropy ‘, ‘Park’ )
+// const heropy = new User ( ‘ Neo ‘, ‘Anderson’ )
+
+// console.log( heropy )                                      //  해당 객체 데이터 새로 생성 후 출력
+// console.log( neo )                                             //  해당 객체 데이터 새로 생성 후 출력
+// console.log( heropy.getFullName ( ) )        //  Heropy Park
+// console.log( neo.getFullName ( ) )              //  Neo Anderson
+
+
+
+
+
+
+// ** ES6 Classes **
+
+// 설명 : 2015년도에 새롭게 나온 자바스크립트 문법으로 클래스 방식이며 일반적으로 많이 쓰인다. 
+//            프로토타입과 기능이 비슷하다.
+
+
+
+// @ prototype 문법
+
+// function User ( first, last ) {        -> User는 대문자로 시작하는 파스칼케이스라고 한다.
+//          this.firstName = first
+//          this.lastName = last
+// }
+// User .prototype. getFullName = function ( ) { 
+//           reutrn ` ${ this.firstName }  ${ this.lastName } `   - - - - - - > 프로토타입 메소드
+// }
+
+
+// const heropy = new User ( ‘Heropy’ , ‘Park’ )
+// const neo = new User ( ‘Neo’ , ‘Anderson’ )
+
+// console.log( heropy.getFullName ( ) )                   //  Heropy Park
+// console.log( neo.getFullName ( ) )                         //   Neo Anderson
+    
+
+
+// @ 위 코드 class 문법으로 작성
+
+
+// class User {  
+//   constructor ( first, last ) {            -> constructor 부분은 위에 작성한 함수 부분과 동일
+//          this.firstName = first
+//          this.lastName = last
+//    }
+//   getFullName ( ) { 
+//       reutrn ` ${ this.firstName }  ${ this.lastName } `   - - - - - - > 프로토타입 메소드
+//    }
+// }
+
+
+// const heropy = new User ( ‘Heropy’ , ‘Park’ )
+// const neo = new User ( ‘Neo’ , ‘Anderson’ )
+
+// console.log( heropy.getFullName ( ) )                   //  Heropy Park
+// console.log( neo.getFullName ( ) )                         //   Neo Anderson
+
+
+
+
+
+// ** Getter , Setter **
+
+// Getter : 어떤 값을 얻는 용도의 메소드 ( 속성에 붙이지 않고 함수테이터 즉 메소드에 붙여서 사용해야 한다. )
+//        = 값을 조회 할 때 사용하는 메소드
+
+// Setter : 어떤 값을 지정하는 용도의 메소드
+//        = 값을 할당 할 때 사용하는 메소드
+
+// class User {
+//      constructor ( first , last ) {
+//         this.firstName = first
+//         this.lastName = last
+//    }
+//   get fullName  ( ) {                    - - - - - - - - - - - - - - - - - - > get 키워드 사용 !
+//        return ` ${ this.firstName } ${ this.lastName } `
+//   }
+//   set fullName ( value ) {         - - - - - - - - - - - - - - - - - - > set 키워드 사용 !
+//      console.log( value )
+//      ; [  this.firstName, thislastName  ] = value.split ( ‘ ‘ )    - - - - > split 메소드 호출 
+//    }
+// }
+
+// const heropy = new User ( ‘Heropy’ , ‘Park’ )
+
+// console.log ( heropy.fullName ( ) )                       //  Heropy Park
+
+// heropy.firstName = ’Neo’
+
+// console.log ( heropy.fullName ( )  )                       //  Neo Park
+
+
+// heropy.fullName = ‘ Neo Anderson ’      - - - - - > set 키워드를 지정해준 후 호출한다.    // Neo Anderson
+// console.log( heropy )              // Neo Anderson
+
+
+// split : 한 문장에서 띄어쓰기가 된 부분을 각 나눠서 배열데이터로 출력 시킬 수 있는 메소드이다.
+
+
+
+
+
+
+
+// ** 정적 메소드 ( Static methods ) **
+//   (보조 함수)
+
+// Arrary.isArray ( )  : 인수로 들어온 데이터가 배열데이터인지 아닌지 확인 후 불린데이터를 반환 해주는 메소드
+
+// 예시 )
+
+// Arrary.isArray ( [ 1, 2, 3 ] )    //  true
+
+// Arrary.isArray ( ‘ abc ‘ )    //  false
+
+
+
+
+
+// @ 정적 메소드 코드 예시 )
+
+
+// class User {
+//   constructor ( first , last ) {
+//         this.firstName = first
+//         this.lastName = last
+//    }
+// getFullName ( ) {
+//     return. ` ${ this.firstName } ${ this.lastName } `
+//   }
+// static isUser ( user ) {                 - - - > 정적 메소드
+//      if ( user.firstName && user.lastName ) { 
+//           return true
+//     }
+//   }
+// }
+
+// const heropy = new User ( ‘Heropy’ , ‘Park’ )
+// const neo = new User ( ‘Neo’ , ‘Anderson’ )
+// const lewis = {
+//         name: ‘Lewis Tang’ ,
+//         age: 85
+// }
+
+
+// console.log( heropy.getFullName ( ) )             // Heropy Park
+// console.log( neo.getFullName ( ) )                   // Neo Anderson
+// console.log( User.isUser ( heropy ) )                             // true
+// console.log( User.isUser ( neo ) )                                   // true
+// console.log( User.isUser ( lewis ) )                                // false
+
+
+
+
+
+
+// ** 상속 Inheritance **
+
+
+
+// instanceof : 해당 키워드 앞쪽에 있는 데이터가 키워드 뒤쪽에 있는 클래스에서 인스턴스로 생성되있는지 확인여부
+
+//           ( 예시 : console.log( bicycle instanceof Bicycle )   )
+
+// ** 운송수단
+
+
+// class Vehicle {
+//   constructor ( acceleration = 1 ) {
+//     this.speed = 0
+//     this.acceleration = acceleration
+//   }
+// accelerate ( ) { 
+//     this.speed += this.acceleration
+//   }
+// decelerate ( ) { 
+//     if ( this.speed <= 0 ) { 
+//     console.og( ‘정지!’ )
+//       return
+//     }
+//     this.speed -= this.acceleration
+//   }
+// }
+
+// extends : 만들어준 클래스 전체 속성을 다른 클래스로 상속하여 사용하려하여 연결하여 쓸 수 있다.
+
+
+
+// ** 자전거
+
+
+// class Bicycle extends Vehicle {      - - - - - - - - - ->  운송수단을 상속하여 연결
+//    constructor ( price = 100, acceleration ) {
+//        super ( acceleration )
+//        this.price = price
+//        this.wheel = 2
+//    } 
+// }
+
+// const bicycle = new Bicycle ( 300 )
+// bicycle.accelerate ( )
+// bicycle.accelerate ( )
+// console.log( bicycle )   - - - - - - - - ->   //   acceleration : 1
+//                                                                                   speed : 0
+//                                                                                   price : 300
+//                                                                                   wheel : 2
+ 
+
+
+// ** 자동차
+
+
+
+// class Car extends Bicycle {      - - - - - - - - - ->  자전거를 상속하여 연결
+//    constructor ( license, price, acceleration ) {
+//        super ( price, acceleration )
+//        this.license = license
+//        this.wheel = 4
+//    } 
+// accelerate ( ) {
+//      if ( !this.license ) { 
+//          console.error ( ‘무면허!’ )
+//         return
+//      }
+//     this.speed += this.acceleration
+//     Console.log( ‘가속!’ , this.speed )
+//   }
+// }
+
+// const carA = new Car( true, 7000, 10 )
+// const carB = new Car( false, 4000, 6 )
+// carA.accelerate ( )
+// carA.accelerate ( )
+// console.log( carA )                            - ->      //acceleration: 10, license: true,
+// console.log( carB )                                            price: 7000, speed: 0, wheel: 4
+
+// //acceleration: 6, license: false,
+//   price: 4000, speed: 0, wheel: 4
+
+
+
+// ** 보트
+
+// class Boat extends Vehicle {
+//   constructor ( price , acceleration ) { 
+//        super ( acceleration )
+//        this.price = price
+//        this.moter = 1
+//    }
+// }
+
+
+// const boat = new Boat ( 1000, 5 )
+// console.log( boat )                             // acceleration: 5, moter: 1, price: 10000, speed: 0
+
+
+
+
+
+
+// ** 상속 instanceof 축소버전 **
+
+// @ 기본적인 상속 코드
+
+// super ( ) : extends 통하여 상속 코드를 만들 때 무조건 super ( )를 사용하여 호출을 해줘야 한다.
+
+// instanceof : 해당 키워드 앞쪽에 있는 데이터가 키워드 뒤쪽에 있는 클래스에서 인스턴스로 생성되있는지 확인여부
+
+//           ( 예시 : console.log( bicycle instanceof Bicycle )   )
+
+
+// extends : 만들어준 클래스 전체 속성을 다른 클래스로 상속하여 사용하려하여 연결하여 쓸 수 있다.
+
+// 예시 )
+
+// class A {
+//    constructor ( ) { }
+// }
+// class B extends A {
+//    constructor ( ) { }
+//        super ( )
+// }
+// class C extends B {
+//    constructor ( ) { }
+//        super ( )
+// }
+
+// const a = new A ( )               
+// const a = new B ( )              
+// const a = new C ( ) 
+
+
+// console.log ( a instanceof A )           //  true    -> a가 A의 인스턴스인지 확인하는 방법 !
+// console.log ( a instanceof B )           //  false   -> a는 A의 인스턴스이기 때문에 자식 B와는 상관이 없다 
+// console.log ( a instanceof C )           //  false   -> a는 A의 인스턴스이기 때문에 자식 C와도 상관이 없다 
+
+
+// console.log ( b instanceof A )           //  true     -> b 는 B의 인스턴스지만 B 가 A에게 상속받아서 true
+// console.log ( b instanceof B )           //  true     -> b 는 B의 인스턴스
+// console.log ( b instanceof C )           //  false   -> b 는 B의 인스턴스이기 때문에 자식 C와 상관이 없다
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Node vs Element
+
+// - 노드(Node) : HTML 요소, 텍스트, 주석 등 모든 것을 의미
+// - 요소(Element): HTML 요소를 의미
+
+const parent = document.querySelector('.parent')
+
+// 부모 요소의 모든 자식 노드 확인!
+console.log(parent.childNodes)
+
+// 부모 요소의 모든 자식 요소 확인!
+console.log(parent.children)
+
+console.log(parent)
