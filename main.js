@@ -1630,9 +1630,275 @@
 // console.log ( b instanceof B )           //  true     -> b 는 B의 인스턴스
 // console.log ( b instanceof C )           //  false   -> b 는 B의 인스턴스이기 때문에 자식 C와 상관이 없다
 
+// ** constructor **
+
+// 설명 : 클래스를 만들 때 컨스트럭터 함수를 만들 때 사용하는 이름
+
+// console. log ( c. constructor === A )           //  false   이유 : 해당 데이터는 A 내부에 데이터가 아니기 때문
+// console. log ( c. constructor === B )           //  false   이유 : 해당 데이터는 B 내부에 데이터가 아니기 때문
+// console. log ( c. constructor === C )           //  true    이유 : 해당 데이터는 C 내부에 존재한다.
+
+
+// const fruits = [ ‘Apple’ , ‘Banana’ ]
+// const fruits = new Array ( ‘Apple’ , ‘Banana’ )
+
+
+// console.log( fruits. constructor === Array )    // true
+// console.log( fruits. Instanceof Array )    // true
+
+// 표준 내장 객체 ( 숫자 및 수학 )
 
 
 
+
+
+// 숫자
+
+// ** .toFixed ( ) **
+
+// 설명 : 숫자를 지정된 고정 소수점 표기(자릿수)까지 표현하는 문자로 반환합니다.
+
+
+// const num = 3.1415926535
+
+// console.log( num.toFixed ( 2 ) )                                    // 3.14   문자데이터
+// console.log( parseFloat ( num.toFixed ( 2 ) ) )        // 3.14   숫자데이터
+
+
+
+// parseFloat ( ) : .toFixed ( ) 함수를 사용하게 되면 출력할 때 문자로 반환된 데이터를 숫자 데이터로 바꿔주는 메소드
+
+
+
+ 
+
+
+
+// ** .toLocaleString ( ) **
+
+
+// 설명 : 숫자를 현지 언어 형식의 문자로 반환한다.
+
+
+
+// const num = 1000000
+
+// console.log( num.toLocaleString(  ) )                                    //  1,000,000
+// console.log( ` $ { num.toLocaleString(  ) } 원` )                  //  1,000,000원  
+
+// # 단위를 적을 시 백틱기호 내부에 호출할 데이터를 작성하고 바로 뒤에 단위를 적을 수 있다.
+
+
+
+
+
+// ** Number.isInteger ( ) **
+
+
+// 설명 : 숫자가 정수 ( integer )인지 확인할 수 있다.
+//          앞에 클래스 필수
+
+
+
+// const num = 123
+// const pi = 3.14
+
+// console.log( Number.isInteger( num ) )                  //  true
+// console.log( Number.isInteger( pi ) )                       //  false  
+ 
+
+// # 메소드 앞에 클래스가 붙어있으면 정적메소드로 위 메소드는 넘버클래스 뒤에 붙여서 사용할 수 있다.
+
+
+
+
+
+// ** Number.isNaN ( ) **
+
+// 설명 : 주어진 값이 Not a Number 인지 확인하는 메소드이다.
+//          앞에 클래스 필수
+
+
+// const num 1 = NaN
+// const num 2 = 123
+// const str  = ‘Hello world’
+// const url  = null
+
+// console.log( Number.isNaN( num 1 ) )                   //  true
+// console.log( Number.isNaN( num 2 ) )                  //  false 
+// console.log( Number.isNaN( str ) )                        //  false 
+// console.log( Number.isNaN( url ) )                        //  false 
+
+
+// # 메소드 앞에 클래스가 붙어있으면 정적메소드로 위 메소드는 넘버클래스 뒤에 붙여서 사용할 수 있다.
+
+
+
+
+
+// ** Number.parseInt ( ) 또는 parseInt ( ) **
+
+// 설명 : 주어진 값( 숫자, 문자 )을 파싱( 분석 )해 특정 진수( radix )의 정수로 반환해준다. ( 모든 소수점 없이 출력 )
+//            앞에 클래스를 붙이지 않고 전역함수로도 사용 가능
+
+// parse : 분석하다
+// Int : 정수( 약어 )
+
+
+// const str = ‘3.1415926535’
+// const num = 3.1415926535
+
+
+// console.log( Number.parseInt ( str, 10 ) )           // 3         -> str의 데이터를 10진수로 만들어준다.
+// console.log( Number.parseInt ( num, 10 ) )        // 3         -> num의 데이터를 10진수로 만들어준다.
+//              ( Number 클래스가 없이 parseInt 함수만 만들어도 똑같다. )
+
+
+
+
+// ** Number.parseFloat ( ) 또는 parseFloat ( ) **
+
+
+// 설명 : 주어진 값( 숫자, 문자 )을 파싱( 분석 )해 부동소수점을 실수로 반환(숫자)한다. ( 소수점 모두 반환 )
+//            앞에 클래스를 붙이지 않고 전역함수로도 사용 가능
+
+
+
+// const str = ‘3.1415926535’
+// const num = 3.1415926535
+
+
+// console.log( Number.parseInt ( str ) )           // 3.1415926535         ->진수 표시 없이 데이터만 작성
+// console.log( Number.parseInt ( num ) )        // 3.1415926535\
+//              ( Number 클래스가 없이 parseInt 함수만 만들어도 똑같다. )
+
+
+
+
+
+
+
+// 수학
+
+
+// ** Math.abs ( ) **
+
+// Math : 수학적인 상수와 함수를 위한 속성 메소드를 가진 내장 객체이다.
+
+
+// 설명 : 주어진 숫자의 절댓값을 반환해준다.
+
+
+
+// console.log( Math.abs ( 2 ) )                   // 2
+// console.log( Math.abs ( -2 ) )                   // 2
+
+
+
+
+// ** Math.ceil ( ) **
+
+// 설명 : 주어진 숫자를 올림하여 정수를 반환해준다.
+
+
+
+// console. log( Math. ceil ( 3.1415926535 ) )                   // 4
+
+
+
+
+
+
+
+// ** Math.floor ( ) **
+
+// 설명 : 주어진 숫자를 내림하여 정수를 반환해준다.
+
+
+
+// console. log( Math. floor ( 3.1415926535 ) )                   // 3
+
+
+
+
+
+// ** Math.max ( ) **
+
+// 설명 : 주어진 숫자 중 음수를 포함하여 가장 큰 숫자를 반환해준다.
+
+
+
+// console. log( Math. max ( 1, 22, 38, 192 ) )                   // 192
+
+
+
+
+
+// ** Math.min ( ) **
+
+// 설명 : 주어진 숫자 중 음수를 포함하여 가장 작은 숫자를 반환해준다.
+
+
+
+// console. log( Math. min ( 1, 22, 38, 192 ) )                   // 1
+
+
+
+
+
+
+
+// ** Math.pow ( ) **
+
+// 설명 : 주어진 숫자의 거듭제곱한 값을 반환해준다.
+
+// pow : 거듭제곱
+
+
+// console. log( Math. pow ( 4, 2 ) )                   // 16                    4 * 4
+// console. log( Math. pow ( 7, 2 ) )                   // 49                    7 * 7
+// console. log( Math. pow ( 10, 3 ) )                   // 1000              10 * 10 = 100 _  100 * 10 = 1000
+
+
+
+
+
+
+// ** Math.random ( ) **
+
+// 설명 : 랜덤으로 숫자 0 이상, 1 미만의 난수를 반환해준다.
+
+
+
+// console. log( Math. random ( ) )                   // 0 과 1 사이의 소수점 결과 출력
+
+
+// @ 특정 범위의 랜덤 정수를 얻는 함수
+
+// function random ( min = 0, max = 10 ) {           - - - - - - - - - - -> 0 부터 10 까지를 기준으로 잡아준다.
+//       return Math.floor ( Math.random ( ) * ( max - min ) ) + min
+// }
+
+// console.log( random ( ) )                                  // 0과 10 사이의 랜덤 숫자 출력
+// console.log( random ( 11, 20 ) )                       // 11과 20 사이의 랜덤 숫자 출력
+// console.log( random ( 101, 999 ) )                  // 101과 999 사이의 랜덤 숫자 출력
+
+
+
+
+
+// ** Math.round ( ) **
+
+// 설명 : 주어진 숫자를 반올림해서 정수를 반환해준다.
+
+
+// const num 1 = 3.141
+// const num 2 = 3.768
+
+
+
+// console. log( Math. Sound ( num 1 ) )                   // 3
+// console. log( Math. Sound ( num 2 ) )                   // 4
 
 
 
