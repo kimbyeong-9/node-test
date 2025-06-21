@@ -1903,6 +1903,396 @@
 
 
 
+// 표준 내장 객체 ( 배열과 객체 )
+
+
+
+// ** .length **
+
+// 설명 : 배열의 길이(숫자)를 반환해준다.
+
+
+
+// const arr = [ ‘A’ , ‘B’ , ‘C’ ]
+
+
+// console.log( arr.length )                                 // 3
+
+
+// ** .at ( ) **
+
+// 설명 : 해당 대상 배열을 인덱싱해준다.  ( 음수 값을 사용하면 뒤에서부터 인덱싱합니다. )
+
+
+// const arr = [ ‘A’ , ‘B’ , ‘C’ ]
+
+
+// console.log( arr [ 0 ] )                                 // A
+// console.log( arr.st ( 0 ) )                            // A
+
+// console.log( arr [ arr.length -1  ] )          // C
+// console.log( arr.at ( -2 ) )                          // B    
+
+// ( 위 콜손코드처럼 작성할 내용이 많다면 .at 을 사용하면 유용하다 )
+
+
+
+
+// ** .concat ( ) **
+
+// 설명 : 해당 대상 배열과 주어진 배열을 병합해 새로운 배열을 반환해준다.
+
+
+// const arr 1 = [ ‘A’ , ‘B’ , ‘C’ ]
+// const arr 2 = [ ‘D’ , ‘E’ , ‘F’ ]
+// const arr 3 = arr1.concat ( arr2 )   -> 대상배열.concat ( 주어진 배열 )
+// const arr 4 = [ …arr1, …arr2 ]
+// const arr 5 = [ …[ ‘A’ , ‘B’ , ‘C’ ], …[ ‘D’ , ‘E’ , ‘F’ ] ]
+
+
+// console.log( arr 1 )                                  // [ ‘A’ , ‘B’ , ‘C’ ]
+// console.log( arr 2 )                                  // [ ‘D’ , ‘E’ , ‘F’ ]
+// console.log( arr 3 )                                  // [ ‘A’ , ‘B’ , ‘C’ , ‘D’ , ‘E’ , ‘F’ ]
+// console.log( arr 4 )                                  // [ ‘A’ , ‘B’ , ‘C’ , ‘D’ , ‘E’ , ‘F’ ]
+// console.log( arr 5 )                                  // [ ‘A’ , ‘B’ , ‘C’ , ‘D’ , ‘E’ , ‘F’ ]
+
+
+
+
+// ** .every ( ) **
+
+// 설명 : 해당 대상 배열의 모든 요소가 콜백 테스트에서 참( Truthy )을 반환하는지 확인해준다.
+
+
+// const arr = [ 1, 2, 3, 4 ]
+// const isValid = arr. every ( item => item < 5 )
+
+// console.log( isValid )                  // true
+
+
+// . every ( ) 메소드 : 데이터 모두가 참 데이터를 반환되는지 확인해준다 ( 하나라도 거짓일 시 false값이 나온다. )
+
+
+
+
+
+// ** .fillter ( ) **
+
+// 설명 : 주어진 콜백 테스트를 통과 ( 참 ( Truthy )을 반환 )하는 모든 요소를 새로운 배열로 반환합니다.
+//         모든 요소가 테스트를 통과하지 못하면 빈 배열을 반환해준다.
+
+// const numbers = [ 1, 20, 7, 9, 104, 0, 58 ]
+// const filteredNumbers = numbers. fillter ( number => number < 30 )
+
+// console.log( filteredNumbers )                  // [ 1, 20, 7, 9, 0 ]
+
+
+
+// @ .fillter( ) 2번째 예제
+
+
+// const user =  [
+//     { name: ’Neo’ , age: 85 },
+//     { name: ’Amy’ , age: 22 },
+//     { name: ’Lewis’ , age: 11 }
+// ]
+// const adults = users.fillter (user => user.age >=19 ) 
+// console.log( adults )                      // [ { name: ’Neo’ , age: 85 }, { name: ’Amy’ , age: 22 } ]
+
+
+
+
+
+
+// ** .find ( ) **
+
+// 설명 : 대상 배열에서 콜백 테스트를 통과하는 첫 번째만 요소를 반환해준다.
+
+// const arr = [ 5, 8, 130, 12, 44 ]
+// const foundItem = arr. find ( item => item < 10 )
+
+// console.log( foundItem )                  // [ 130 ]
+
+
+
+// @ .find ( ) 2번째 예제
+
+
+// const users = [ 
+// { name: ’Neo’, age: 85 },
+// { name: ’Amy’, age: 22 },
+// { name: ’Lewis’, age: 11 }
+// ]
+// const foundUser = users. find ( user => user. name === ‘Amy’ )
+
+// console.log( foundUser )                  // { name: ’Neo’, age: 85 }
+
+
+
+
+
+// ** .findIndex ( ) **
+
+// 설명 : 대상 배열에서 콜백 테스트를 통과하는 첫 번째만 요소의 인덱스를 반환해준다.
+
+// const arr = [ 5, 8, 130, 12, 44 ]
+// const index = arr. findIndex ( item => item > 10 )
+
+// console.log( index )                  // [ 2 ]
+
+
+
+
+
+
+// ** .flat ( ) **
+
+// 설명 : 대상 배열의 모든 하위 배열을 지정한 깊이( Depth )까지 이어붙인 새로운 배열을 생성해준다.
+//           ( 깊이의 기본값은 1이다)
+
+// const arr = [ 1, 2, [ 3, 4, [ 5, 6 ] ] ]
+
+// console.log( arr.flat ( ) )                  // [ 1, 2, 3, 4, Array(2) ]
+// console.log( arr )                               // [ 1, 2, Array(3) ]
+// console.log( arr.flat( 2 ) )               // [ 1, 2, 3, 4, 5, 6 ]
+// console.log( arr.flat( Infinity ) )               // [ 1, 2, 3, 4, 5, 6 ]
+
+// @ 기본값이 1 이므로 배열안에 또 다른 배열을 한 배열로 출력하고 싶다면 인수로 하위 배열 개수만큼의 숫자를 적어준다.
+
+
+// Infinity : 무한이라는 의미로, 하위 배열의 개념 상관없이 한 배열로 묶어서 반환해주는 메소드이다.
+
+
+
+
+
+
+// ** .forEach ( ) **
+
+// 설명 : 대상 배열의 길이만큼 주어진 콜백을 실행해준다.
+//            작성하기는 편리하지만 반복을 종료시킬 수 없다.
+//           ( 깊이의 기본값은 1이다)
+
+
+// const arr = [ ‘A’ , ‘B’ , ‘C’  ]
+
+// arr.forEach ( item => console.log( item )       // A, B, C 
+
+
+// for ( let i = 0; i < arr.length; i += 1 ) {
+// console.log( arr[ i ] )               // A, B, C 
+
+
+
+
+
+
+
+// ** .includes ( ) **
+
+// 설명 : 대상 배열이 특정 요소를 포함하고 있는지 확인해준다.
+
+
+// const arr = [ 1, 2, 3 ]
+
+// console.log( arr.includes ( 7 ) )     // false
+// console.log( arr.includes ( 2 ) )     // true
+
+
+
+// @ .includes ( ) 2번째 예제
+
+// const fruits = [ ‘Apple’ , ‘Banana’ , ‘Cherry’ ]
+
+// console.log( fruits.includes ( ‘Apple’ ) )      // true
+// console.log( fruits.includes ( ‘cherry’ ) )     // false    -> 첫 알파벳이 소문자 즉, 대문자와 소문자는 다르다.
+
+
+
+// @ .includes ( ) 3번째 예제
+
+
+// const users = [ 
+//     { name: ’Neo’ , age: 85 },
+//     { name: ’Amy’ , age: 22 },
+//     { name: ’Lewis’ , age: 11 }
+// ]
+// console.log( users.includes ( { name: ’Neo’ , age: 85 } ) )    // flase 
+//                                                                             ( users안에 객체메모리 주소와 콘솔 안에 주소가 다르게 나온다 ) 
+//                                                                                          *참조형 영항
+
+
+// const neo = users [ 0 ]
+// console.log( users.includes( neo ) )           // true ( users 내부에 메모리 주소를 가져와 neo에 할당 )
+
+
+
+// 참조형 : 데이터 생김새가 똑같아도 서로 충분히 다른 데이터일 수 있는 특징이 있다.
+//                 ( 보기 : 객체데이터, 배열데이터, 함수데이터 ) 
+
+
+
+
+
+// ** .join ( ) **
+
+// 설명 : 대상 배열의 모든 요소를 구분자로 연결한 문자를 반환해준다.
+
+
+// const arr = [ ‘Apple’ , ‘Banana’ , ‘Cherry’ ]
+
+// console.log( arr.join ( ‘,’ ) )       // Apple,Banana,Cherry
+// console.log( arr.join ( ‘,  ‘ ) )     // Apple, Banana, Cherry   띄어쓰기도 적용
+// console.log( arr.join ( ‘ / ‘ ) )     // Apple/Banana/Cherry
+
+
+
+
+// ** .map ( ) **
+
+// 설명 : 대상 배열의 길이만큼 주어진 콜백을 실행하고, 콜백의 반환 값을 모아 새로운 배열을 반환해준다.
+
+
+// const numbers = [ 1, 2, 3, 4 ]
+// const newNumbers = numbers.map ( item => item * 2 )
+
+
+// console.log( newNumbers )       // [ 2, 4, 6, 8 ]
+// console.log( numbers )               // [ 1, 2, 3, 4 ]
+
+
+
+// @ .map ( ) 2번째 예제
+
+
+// const users = [
+//    { name: ’Neo’ , age: 85 },
+//    { name: ’Amy’ , age: 22 },
+//    { name: ’Lewis’ , age: 11 }
+// ]
+// const newUsers = users.map ( user => {
+//    retrun {
+//       …user,  - - - - - - - - > name과 age를 나타냄
+//       isValid: true,     - - - > 기본 데이터에 추가
+//       email: null    - - - - - > 기본 데이터에 추가
+//     }
+// } )
+
+// console.log ( newUsers )                 //  0: { name: ’Neo’ , age: 85, isValid: true, email: null }
+//                                                                   1: { name: ’Amy’ , age: 22, isValid: true, email: null }
+//                                                                   2: { name: ’Lewis’ , age: 11, isValid: true, email: null }
+
+
+
+
+
+// ** .pop ( ) **
+
+// 설명 : 대상 배열에서 마지막 요소를 제거하고 제거한 요소를 반환해준다.
+//           대상 배열 원본이 변경된다
+
+// const fruits = [ ‘Apple’ , ‘Banana’ , ‘Cherry’ ]
+
+
+// console.log( fruits.pop( ) )       //  Cherry 
+// console.log( fruits )                   // [ ‘Apple’ , ‘Banana’ ] -> 체리 제거 후 반환
+
+
+
+
+
+// ** .push ( ) **
+
+// 설명 : 대상 배열의 마지막에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환해준다.
+//           대상 배열 원본이 변경된다
+
+// const fruits = [ ‘Apple’ , ‘Banana’ , ‘Cherry’ ]
+
+// const newLength = fruits.push ( ‘Orange’ )
+// console.log( newLength )                           //4
+// console.log( fruits )                                     // [ ‘Apple’ , ‘Banana’ , ‘Cherry’ , ‘Orange’ ]  
+ 
+// fruits.push ( ‘Mango’ , ’Strawberry’ ) 
+// console.log( fruits )                        // [ ‘Apple’ , ‘Banana’ , ‘Cherry’ , ‘Orange’, ’Mango’ , ’Strawberry’ ]  
+  
+
+
+
+
+// ** .reduce ( ) **
+
+// 설명 : 대상 배열의 길이만큼 주어진 콜백을 실행하고, 마지막에 호출되는 콜백의 반환 값을 반환해준다.
+//           각 콜백의 반환 값은 다음 콜백으로 전달된다.
+
+// const numbers = [ 1, 2, 3 ]
+// const sum = numbers. reduce ( ( acc, cur ) => acc + cur, 0 )          -> 초기값
+//                                                                             -> 0+1 =1, 1+2=3, 3+3=6
+// console.log( sum )                            // 6
+
+
+
+// accumulator ( acc ) : 누적되는 값
+
+// currentValue ( cur ) : 반복되는 각각의 배열 아이템
+
+
+
+
+// @ .reduce ( ) 2번째 예제
+
+// const users = [
+//     { name: ’Neo’ , age: 85 },
+//     { name: ’Amy’ , age: 22 },
+//     { name: ’Lewis’ , age: 11 }
+// ]
+
+// # 총 나이 계산
+
+// const totalAge = users.reduce ( ( acc, cur ) => acc + cur.age, 0 ) 
+
+// console.log( totalAge )                       // 118
+// console.log( ` 평균나이: $ { ( totalAge / users.length ) . toFixed ( 1 ) ) } 세 ` )   // 평균나이: 39.3세
+
+
+// # 모든 이름 추출
+
+// const names = users
+// . reduce ( ( acc, cur ) => {
+//       acc.push ( cur.name )
+//       retrurn acc
+// }, [ ] )
+// .join ( ‘ ,   ’ )
+
+// console.log( names )                              // Neo, Amy, Lewis
+
+
+
+
+// ** .reverse ( ) **
+
+// 설명 : 대상 배열의 순서를 반전한다
+//          ( 대상 배열 원본이 변경됩니다 )
+
+// const arr = [ 'A' , ‘B’ , ‘C’ ]
+// const reversed = arr.reverse ( )
+
+// console.log( reversed )                  // [ ‘C’ , ‘B’ , ‘A’ ]
+// console.log( arr )                            // [ ‘C’ , ‘B’ , ‘A’ ]  -> reverse 한 후 결과가 변경된 데이터값으로 유지된다.
+
+
+
+
+
+// ** .shift ( ) **
+
+// 설명 : 대상 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다.
+//          ( 대상 배열 원본이 변경됩니다 )
+
+// const arr = [ 'A' , ‘B’ , ‘C’ ]
+// const reversed = arr. reverse ( )
+
+// console.log( arr.shift )                  // [ A ]
+// console.log( arr )                           // [ ‘B’ , ‘C’ ]
 
 
 
