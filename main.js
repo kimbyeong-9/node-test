@@ -2295,6 +2295,285 @@
 // console.log( arr )                           // [ ‘B’ , ‘C’ ]
 
 
+// ** .slice ( ) **
+
+// 설명 : 대상 배열의 일부를 추출해 새로운 배열을 반환합니다.
+//            두번째 인수 직전까지 추출하고, 두 번째 인수를 생략하면 대상 배열의 끝까지 추출합니다.
+
+// const arr = [ 'A' , ‘B’ , ‘C’ , ‘D’ , ‘E’ , ‘F’ , ‘G’ ]
+// const reversed = arr. reverse ( )
+
+// console.log( arr.slice ( 0, 3 ) )                          // [ 'A' , ‘B’ , ‘C’ ]
+// console.log( arr.slice ( 4, -1 ) )                         // [ ‘E’ , ‘F’ ]
+// console.log( arr.slice ( 4 ) )                               // [ ‘E’, ‘F’, ‘G’ ]
+// console.log( arr )                                                 // [ 'A' , ‘B’ , ‘C’ , ‘D’ , ‘E’ , ‘F’ , ‘G’ ]
+
+
+
+
+
+// ** .some ( ) **
+
+// 설명 : 대상 배열의 어떤 요소라도 콜백 테스트를 통과하는지 확인합니다.
+
+
+// const arr = [ 1, 2, 3, 4 ]
+// const isValid = arr.some ( item => item > 3  )
+
+// console.log( isValid )                          // true
+
+
+
+
+
+
+// ** .sort ( ) **
+
+// 설명 : 대상 배열을 콜백의 반환 값( 음수, 양수, 0 )에 따라 정렬해준다.
+//           콜백을 제공하지 않으면, 요소를 문자열로 반환하고 유니코드 코드 포인트 순서로 정렬해준다.
+//            ( 대상 배열의 원본이 변경됩니다. )
+ 
+
+// const numbers = [ 4, 17, 2, 103, 3, 1, 0 ]
+
+// numbers.sort ( )
+// console.log( numbers )                          // [ 0, 1, 103, 17, 2, 3, 4 ]
+
+// numbers.sort ( ( a, b ) => a - b )
+// console.log( numbers )                          // [ 0, 1, 2, 3, 4, 17, 103 ]
+
+// numbers.sort ( ( a, b ) => b - a )
+// console.log( numbers )                          // [ 103, 17, 4, 3, 2, 1, 0 ]
+
+
+
+
+// @ .sort ( ) 2번째 예제
+
+
+// const users = [
+//   { name: ’Neo’ , age: 85 },
+//   { name: ’Amy’ , age: 22 },
+//   { name: ’Lewis’ , age: 11 }
+// ]
+
+// users.sort ( ( a, b ) => a.age - b.age )
+// console.log ( users )                                 // 나이가 적은 순부터 정렬된다.
+
+// ( 매개변수를 순서대로 빼기 연산자를 통해 계산하게 되면 숫자가 더 작은 대상부터먼저 정렬이 된다. )
+
+
+// users.sort ( ( a, b ) => b.age - a.age )
+// console.log ( users )                                 // b로 시작하면 나이가 큰 순서로 정렬된다.
+
+// ( 매개변수를 순서대로 빼기 연산자를 통해 계산하게 되면 숫자가 더 작은 대상부터먼저 정렬이 된다. )
+
+
+
+
+
+// ** .splice ( ) **
+
+// 설명 : 대상 배열에 요소를 추가하거나 삭제하거나 교체해준다.
+//           ( 대상 배열의 원본이 변경됩니다. )
+
+
+// const arr = [ 'A' , ‘B’ , ‘C’ ]
+// arr.splice ( 2, 0, ‘X’ )
+
+// console.log( arr )                          //  [ 'A' , ‘B’ , ’X’ , ‘C’ ]
+
+
+// const arr = [ 'A' , ‘B’ , ‘C’ ]
+// arr.splice ( 1, 1 )
+
+// console.log( arr )                          //  [ 'A' , ‘C’ ]
+
+
+// const arr = [ 'A' , ‘B’ , ‘C’ ]
+// arr.splice ( 1, 2 )
+
+// console.log( arr )                          //  [ 'A' ]
+
+
+
+// 1. 첫 번째 인수는 추가, 삭제, 교체하고자 하는 인덱스 번호이다.
+// 2. 두 번째 인수는 원하는 곳부터 아이템을 삭제하고자 하는 갯수이다.
+// 3. 세 번째 인수는 그 삭제한 자리에 추가 할 내용을 적을 수 있다.
+
+
+
+
+// ** .unshift ( ) **
+
+// 설명 : 새로운 요소를 대상 배열의 맨 앞에 추가하고 새로운 배열의 길이를 반환합니다.
+//           ( 대상 배열의 원본이 변경됩니다. )
+
+
+// const arr = [ 'A' , ‘B’ , ‘C’ ]
+
+
+// console.log( arr.unshift ( ‘X’ ) )           //  4     -> 길이를 반환
+// console.log( arr )                                    //  [ ’X’ , 'A' , ‘B’ , ‘C’ ]
+
+
+
+
+
+
+// ** Array.from ( ) **
+
+// 설명 : 유사 배열 ( Array - like )을 실제 배열로 반환해준다.
+//          1.  배열과 유사하게 작성한 객체 데이터를 유사배열이라고 부른다 
+//          2. 사용 시 length 값을 꼭 넣어줘야한다.
+
+
+
+
+// const arraylike = {
+//    0: ‘A’ ,
+//    1: ‘B’ ,
+//    2: ‘C’ ,
+//    length: 3       -> 유사 배열을 사용할 때에는 랭스 속성을 꼭 같이 사용해야한다.
+// }
+
+
+// console.log( arraylike. constructor === Array )                               //  false    
+// console.log( arraylike. constructor === Object )                                // true
+
+
+// arraylike.forEach ( item => console.log( item ))
+// -> forEach는 객체 데이터에서 사용하는 메소드가 아니기 때문에 언디파운드 값이 나온다.
+
+// Array.from( arraylike ).forEach( item => console.log( item ) )        // A B C
+// -> Array.from 을 사용해 객체데이터를 배열데이터로 바꿔주고 사용하면 출력 잘 됨
+
+
+
+
+
+// ** Array.isArray ( ) **
+
+// 설명 : 배열 데이터인지 확인합니다.
+
+
+
+// const array = [ ‘A’ , ‘B’ , ‘C’ ]
+// const arraylike = {
+//      0: ‘A’,
+//      1: ‘B’,
+//      2: ‘C’,
+//      length: 3
+// }
+
+
+// console.log( Array.isArray ( array ) )                // true      
+// console.log( Array.isArray ( arraylike ) )          // flase    -> 객체 데이터이기 때문
+
+
+
+
+
+
+
+// ** Object.assign ( ) **
+
+// 설명 : 하나 이상의 출처( Source ) 객체로부터 대상( Target ) 객체로 속성을 복사하고 대상 객체를 반환해준다.
+
+
+
+// const target = { a: 1, b: 2 }
+// const source1 = { b: 3, c: 4 }
+// const source2 = { c: 5, d: 6 }
+// const result = Objeact.assign ( target, source1, source2 )
+// const result = {
+// …target ,
+// …source1 ,
+// …source2 
+// }    -> 전개 연산자도 가능
+
+
+
+// console.log( target )                // { a: 1, b: 3, c: 5, d: 6 }    -> 같은 속성은 나중의 값이 순서대로 덮어쓰여 출력
+
+// console.log( result )                 // { a: 1, b: 3, c: 5, d: 6 }  
+
+
+
+// @ 객체 데이터를 수정하지 않고 새로운 객체 데이터를 반환하도록 만드는 법 
+
+// const result = Objeact.assign ( {}, target, source1, source2 )  -> 오브젝.어싸인의 첫 인수로 { } 작성
+
+
+
+
+
+
+// ** Object.entries ( ) **
+
+// 설명 : 주어진 객체의 각 속성과 값으로 하나의 배열 만들어 요소로 추가한 2차원 배열을 반환해준다.
+//      하나의 객체데이터를 취급할 때 그 객체 데이터가 가지고 있는 속성이나 값을 모두 활용할 때 유용하다.
+
+
+// const user = {
+//    name: ‘Heropy’ ,
+//    age: 85 , 
+//    isValid: true , 
+//    email: ‘asdasdasd@gmail.com’
+// }
+ 
+// console.log( Object.entries ( user ) )                          // 배열데이터 안에 속성과 값을 각각의 배열데이터로 출력                                                                                     ( 그것을 2차원 배열이라고 말한다. )
+
+ 
+// for ( const [ key, value ] of Object.entries ( user ) ) {
+//      console.log( key, value )                                             // 각각의 배열 아이템을 구조분해할당을 통해서 첫 
+// }                                                                                               번째는 속성, 두번째는 값으로 출력
+
+
+
+
+
+
+
+// ** Object.keys ( ) **
+
+// 설명 : 주어진 객체의 각 속성 이름을 나열한 배열을 반환해준다.
+
+
+// const user = {
+//    name: ‘Heropy’ ,
+//    age: 85 , 
+//    isValid: true , 
+//    email: ‘asdasdasd@gmail.com’
+// }
+
+// console.log ( Object.keys ( user ) )     // 모든 속성 이름이 배열 하나로 출력
+ 
+
+// Object.keys 안에 key는 각각의 속성들을 의미한다.
+
+
+
+
+
+
+// ** Object.values ( ) **
+
+// 설명 : 주어진 객체의 속성 값을 나열한 배열을 반복해준다.
+
+
+// const user = {
+//    name: ‘Heropy’ ,
+//    age: 85 , 
+//    isValid: true , 
+//    email: ‘asdasdasd@gmail.com’
+// }
+
+// console.log ( Object.vlaue ( user ) )     // 모든 속성 각각 값이 출력!
+ 
+
+
+// 속성, 값 모두 반환 할 시 Object.entries 데이터값만 반환할 시 Object.vlaue
 
 
 
