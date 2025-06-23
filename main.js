@@ -2578,6 +2578,395 @@
 
 
 
+// ** JSON ( Javascript Object Notation ) **
+
+// 설명
+// 1. 데이터 전달을 위한 표준 포맷
+// 2. 문자, 숫자, 불린, Null, 객체, 배열만 사용
+// 3. 문자는 큰 따옴표만 사용하여 굳이 스스로 붙이지 않아도 출력 후 자동으로  큰따옴표가 묶여있다.
+// 4. 후행 쉼표 사용 불가  -> 데이터 마지막 속성의 끝 부분에 쉼표를 추가할 수 없다 ( 자바스크립트에서는 가능 )
+// 5. .json 확장자 사용
+
+
+// JSON.stringity ( ) - 데이터를 JSON 문자로 변환한다.
+// JSON.parse ( ) - JSON 문자를 분석해 데이터를 변환한다.
+
+
+
+// console.log ( JSON,stringity ( ‘ Hello world! ’ ) )   // “ Hello world! ” -> 큰 따옴표가 들어가있지만 생략된 상태
+// console.log ( JSON,stringity ( 123 ) )                       // 123       -> 문자 데이터로 출력
+// console.log ( JSON,stringity ( false ) )                      // false
+// console.log ( JSON,stringity ( null ) )                         // null
+// console.log ( JSON,stringity ( { name : ‘Heropy’, age : 85 } ) )       //  { “name”: “Heropy”, “age”: 85  }
+// console.log ( JSON,stringity ( [ 1, 2, 3 ] ) )               // [ 1, 2, 3 ]
+
+
+// @ 위 코드 JSON의  path라는 메소드 예제
+
+// console.log ( JSON,prase ( ‘“Hello world!”’ ) )    -> 큰 따옴표 사용시 작은 따옴표 작성해줘야한다.
+// console.log ( JSON,prase ( ‘ 123 ‘ ) )
+// console.log ( JSON,prase ( ‘ false ’ ) )
+// console.log ( JSON,prase ( ‘ null ’ ) )
+// console.log ( JSON,prase ( ’ { “name”: “Heropy”, “age”: 85  } ’ ) ) 
+// console.log ( JSON,prase ( ‘[ 1, 2, 3 ]’ ) )                                                               // 모든 값이 문자데이터로 출력 !
+
+
+// package.json : 제이슨 포맷으로 만들어진 하나의 데이터이다.
+
+
+
+
+// 표준 내장 객체 ( 날짜 )
+
+
+
+// ** Date ( Class ) **
+
+// 설명 : 찾고자 하는 날짜의 데이터를 반환해주는 클래스이다.
+
+
+// const date = new Date ( )
+// console.log( date )                                    // Wed Sep 28 2022 15:09:22 GMT + 0900 ( 한국 표준시 )
+
+
+
+// 타임스탬프 : 날짜 정보를 가지고 있는 문자 데이터라고 부른다 ( 예시: 위 출력 결과 )
+
+
+// 1
+// const d1 = new Date ( 2022, 11, 16, 12, 57, 30 )   - > 년, 월, 일, 시, 분, 초 순서로 작성 
+// console.log( d1 )                        !@ 월 부분은 제로-베이스넘버링을 사용하게 되어 11을 작성하면 12월로 출력된다.
+//  // Fri Dec 16 2022 12:57:30 GMT + 0900 ( 한국 표준시 )
+
+
+// 2
+// const d2 = new Date ( Fri Dec 16 2022 12:57:30 GMT + 0900 ( 한국 표준시 ) )   - > 타임스탬프 문자로도 출력 가능
+// console.log( d2 )                      
+//  // Fri Dec 16 2022 12:57:30 GMT + 0900 ( 한국 표준시 )
+
+// console.log( d2.getFullYear ( ) )                // 2022
+
+
+
+
+
+
+// ** .getFullYear ( ) 와 .setFullYear ( ) **
+
+
+// 설명 : 날짜 인스턴스의 ‘ 연도 ’ 를 반환하거나 지정합니다.
+
+
+// getFullYear ( ) : 연도 데이터를 반환해준다.
+
+// setFullYear ( ) : 연도 데이터를 지정해서 반환해준다.
+
+
+// const date = new Date ( )
+
+// console.log( date.getFullYear ( ) )       // 2022
+
+
+// date.setFullYear (2023)
+// console.log( date.getFullYear ( ) )       // 2023
+// console.log( date )                                    // Thu Sep 28 2023 15:20:23 GMT + 0900 ( 한국 표준시 )
+
+
+
+
+
+
+
+// ** .getMonth ( ) 와 .setMonth ( ) **
+
+
+
+// 설명 : 날짜 인스턴스의 ‘ 월 ’ 를 반환하거나 지정합니다.
+//           ( 제로베이스넘버링 ( zero-based Numbering )  0부터 시작해야 한다 )
+
+
+// getMonth ( ) : 월 데이터를 반환해준다.
+
+// setMonth ( ) : 월 데이터를  지정해서 반환해준다.
+
+
+// const date = new Date ( )
+
+// console.log( date.getMonth ( ) )        // 8
+// console.log( date )                                 // Wed Sep 28 2022 15:27:35 GMT + 0900 ( 한국 표준시 )
+
+
+// date.setMonth (0)
+// console.log( date.getMonth ( ) )        // 0
+// console.log( date )                                 // Fri Jan 28 2022 15:27:35 GMT + 0900 ( 한국 표준시 )
+
+
+
+
+
+
+// ** .getDate ( ) 와 .setDate ( ) **
+
+
+
+// 설명 : 날짜 인스턴스의 ‘ 일 ’ 를 반환하거나 지정합니다.
+
+
+// getDate ( ) : 일 데이터를 반환해준다.
+
+// setDate ( ) : 일 데이터를  지정해서 반환해준다.
+
+
+// const date = new Date ( )
+
+// console.log( date.getDate ( ) )        // 8
+// console.log( date )                              // Wed Sep 28 2022 15:27:35 GMT + 0900 ( 한국 표준시 )
+
+
+// date.setDate (11)
+// console.log( date.getDate ( ) )        // 0
+// console.log( date )                              // Sun Sep 11 2022 15:27:35 GMT + 0900 ( 한국 표준시 )
+
+
+
+
+
+
+// ** .getHours ( ) 와 .setHours ( ) **
+
+
+
+// 설명 : 날짜 인스턴스의 ‘ 시간 ’ 를 반환하거나 지정합니다.
+
+
+// getHours ( ) : 시간 데이터를 반환해준다.
+
+// setHours ( ) : 시간 데이터를  지정해서 반환해준다.
+
+
+// const date = new Date ( )
+
+// console.log( date.getHours ( ) )        // 15
+// console.log( date )                                 // Wed Sep 28 2022 15:27:35 GMT + 0900 ( 한국 표준시 )
+
+
+// date.setHours (7)
+// console.log( date.getHours ( ) )        // 7
+// console.log( date )                                 // Sun Sep 11 2022 07:27:35 GMT + 0900 ( 한국 표준시 )
+  
+
+
+
+
+// ** .getMinutes ( ) 와 .setMinutes ( ) **
+
+
+
+// 설명 : 날짜 인스턴스의 ‘ 분 ’ 을 반환하거나 지정합니다.
+
+
+// getMinutes ( ) : 분 데이터를 반환해준다.
+
+// setMinutes ( ) : 분 데이터를  지정해서 반환해준다.
+
+
+// const date = new Date ( )
+
+// console.log( date.getMinutes ( ) )        // 48
+// console.log( date )                                     // Wed Sep 28 2022 15:48:35 GMT + 0900 ( 한국 표준시 )
+
+
+// date.setMinutes (2)
+// console.log( date.getMinutes ( ) )        // 2
+// console.log( date )                                     // Sun Sep 11 2022 15:02:35 GMT + 0900 ( 한국 표준시 )
+  
+
+
+
+
+// ** .getSeconds ( ) 와 .setSeconds ( ) **
+
+
+
+// 설명 : 날짜 인스턴스의 ‘ 초 ’ 을 반환하거나 지정합니다.
+
+
+// getSeconds ( ) : 초 데이터를 반환해준다.
+
+// setSeconds ( ) : 초 데이터를  지정해서 반환해준다.
+
+
+// const date = new Date ( )
+
+// console.log( date.getSeconds ( ) )        // 38
+// console.log( date )                                      // Wed Sep 28 2022 15:48:38 GMT + 0900 ( 한국 표준시 )
+ 
+
+// date.setSeconds (57)
+// console.log( date.getSeconds ( ) )        // 57
+// console.log( date )                                      // Sun Sep 11 2022 15:48:57 GMT + 0900 ( 한국 표준시 )
+  
+
+
+
+
+
+// ** .getDay ( )  **
+
+
+// 설명 : 날짜 인스턴스의 ‘ 요일 ’ 를 지정할 수는 없고 반환만  할 수 있다.
+
+
+
+// const date = new Date ( )
+// const day = date,getDay ( )
+
+
+// console.log( day )                                       // 3
+// console.log( getDayKo ( day ) )             // 수요일
+ 
+
+// function getDayKo ( day ) {
+//     switch ( day ) {
+//         case 0: return ‘일요일’
+//         case 1: return ‘월요일’
+//         case 2: return ‘화요일’
+//         case 3: return ‘수요일’
+//         case 4: return ‘목요일’
+//         case 5: return ‘금요일’
+//         case 6: return ‘토요일’
+//    }
+// }
+
+
+
+
+
+// ** .getTime ( ) 와 .setTime ( ) **
+
+
+// 설명 : 날짜 인스턴스의 ‘ 밀리초(ms) ’ 를 반환하거나 지정합니다.
+//           ( `1970-01-01 00:00:00`( 유닉스타임 ) 부터 경과된 시간만 반환 가능하다. )
+
+
+// .getTime ( ) : 밀리초 데이터를 반환해준다.
+
+
+// .setTime ( ) : 밀리초 데이터를  지정해서 반환해준다.
+
+ 
+
+// const date = new Date ( )
+
+// console.log( date.getTime ( ) )                      // 1664348309502 ( 유닉스타임 후 경과된 시간이 출력 )
+// console.log( date )                                            // Wed Sep 28 2022 15:58:29 GMT + 0900 ( 한국 표준시 )
+
+
+
+// date.setTime ( 1700000000000 )
+// console.log( date.getTime ( ) )                            // 1700000000000
+// console.log( date )                                                 // Wed Nov 15 2023 07:13:20 GMT + 0900 ( 한국 표준시 )
+
+
+
+
+
+
+
+
+// @ .getTime ( ) , .setTime ( ) 유용하게 쓰는 방법 예제
+
+
+
+// Date.prototype.isAfter = function ( date ) {
+//       const a = this.getTime ( )    -> this는 일반함수를 사용했기 때문에 호출되는 그 대상 객체를 의미한다.
+//       const b = date.getTime ( )
+//         return a > b
+// }
+
+// const d1 = new Date ( ’Sat Jan 01 2022 00:00:00 GMP + 0900 ( 한국 표준시 )’ )
+// const d1 = new Date ( ’Sun Jan 01 2022 00:00:00 GMP + 0900 ( 한국 표준시 )’ )
+
+
+// console.log( d1.isAfter ( d2 ) )           // false
+// console.log( d2.isAfter ( d1 ) )          // true
+
+
+
+
+// 코드 설명 : 현재 코드는 a와 b 중 어떤 속성이 더 오래된 시간인지 구분하는 로직이다.
+
+
+
+
+
+// **  Date.now ( ) **
+
+
+// 설명 : ` 1970-01-01 00:00:00 `( 유닉스타임 ) 부터 경과한 메소드가 호출될 때의 ‘밀리초( ms )’로 반환해준다.
+
+
+ 
+
+// const time = new Date ( ).getTime ( )
+// console.log( Date.now ( ) )                       // 1664349597861
+// console.log( time )                                      // 1664349597861
+
+
+// setTimeout ( ( ) => {
+//     console.log( Date.now ( ) )                  // 1664349598861
+//     console.log( time )                                  // 1664349597861
+// }, 1000 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

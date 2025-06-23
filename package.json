@@ -10,7 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "lodash": "^4.16.1"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "parcel": "^2.15.2"
