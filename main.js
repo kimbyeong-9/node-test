@@ -2917,6 +2917,471 @@
 //     console.log( Date.now ( ) )                  // 1664349598861
 //     console.log( time )                                  // 1664349597861
 // }, 1000 )
+// 표준 내장 객체 ( 문자 )
+
+
+// ** .length **
+
+// 설명 : 문자( 숫자 )의 길이를 반환한다.
+
+
+// const str = ‘ Hello world! 
+
+// console.log( str.length )             // 12  ( 문자 하나씩 개수 )
+
+
+
+
+// ** .includes ( ) **
+
+// 설명 : 해당 대상 문자에 주어진 문자가 포함되어 있는지 ( 불린 ) 확인합니다.
+
+// const str = ‘ Hello world! ‘
+
+// console.log( str.includes ( ‘ Hello ‘ ) )         // true
+// console.log( str.includes ( ‘ hello ‘ ) )          // false
+// console.log( str.includes ( ‘ hello ‘, 1 ) )      // false    (두번째 인수인 숫자의 의미는 패스할 칸 수이다.)
+
+// if ( !str.includes( ‘HEROPY’ ) ) {
+//     console.log( ‘HEROPY가 없습니다.’ )          // HEROPY가 없습니다.
+// }
+
+
+
+
+// ** .indexof ( ) **
+
+// 설명 : 해당 대상 문자에 주어진 문자와 일치하는 첫 번째 인덱스( 숫자 )를 반환합니다.
+//             ( 일치하는 문자가 없으면 ` -1 `을 반환합니다. )
+
+
+// const str = ‘ Hello world! ‘
+
+// console.log( str.indexof ( ‘ world ‘ ) )         // 6   ( world부분은 6번째알파벳부터 시작하기 때문 )
+// console.log( str.indexof ( ‘ Heropy ‘ ) )      // -1  ( 해당 문자는 데이터 안에 없기 때문 )
+
+// if (str.indexof( ‘HEROPY’ ) === -1 ) {
+//     console.log( ‘HEROPY가 없습니다.’ )          // HEROPY가 없습니다.
+// }
+
+
+
+
+// ** .padEnd ( ) **
+
+// 설명 : 해당 대상 문자 길이( length )가 지정된 길이보다 작으면,
+//           주어진 문자를 지정된 길이까지 끝에 붙여 새로운 문자를 반환한다.
+
+
+// const str = ‘1234567’
+
+// console.log( str.padEnd ( 10, ‘0’ ) )     // 1234567000( 해당문자가10개까지 안되서 2번째 인수로 길이 채움 )
+// console.log( str.padEnd ( 10, ‘!’ ) )      // 1234567!!!
+// console.log( str )                                        // 1234567
+ 
+
+
+
+// ** .padstart ( ) **
+
+// 설명 : 해당 대상 문자 길이( length )가 지정된 길이보다 작으면,
+//           주어진 문자를 지정된 길이까지 앞에 붙여 새로운 문자를 반환한다.
+
+
+// const str = ‘1234567’
+
+// console.log( str.padStart ( 10, ‘0’ ) )     // 0001234567( 해당문자가10개까지 안되서 2번째 인수로 길이 채
+//                                                                          움 )
+// console.log( str.padStart ( 10, ‘?’ ) )      // ???1234567
+// console.log( str )                                           // 1234567
+
+
+
+// ** .replace ( ) **
+
+// 설명 : 해당 대상 문자에서 패턴 ( 문자, 정규식 )과 일치하는 부분을 교체한 새로운 문자를 반환한다.
+
+
+
+// const str = ‘ Hello, Hello?! ’
+
+
+// console.log( str.replace ( ‘Hello’ , ‘Hi’ ) )       // Hi, Hello?! ( 데이터 안에 Hello 부분을 2번째 인수로 교체 )
+// console.log( str.replace ( /Hello/g , ‘Hi’ ) )  // Hi, Hi?!( 문자 데이터 안에 있는 모든 Hello 문자를 Hi로 교체 )
+// console.log( str )                                                     // Hello, Hello?!
+ 
+// /Hello/g : 문자 데이터 안에 있는 모든 Hello 문자를 Hi로 바꿔주는 정규식 방법이다. ( g는 글로벌 약자이다. )
+
+
+
+// ** .slice ( ) **
+
+// 설명 : 해당 대상 문자의 일부를 추출해 새로운 문자를 반환한다.
+//          두번째 인수 직전까지 추출하고, 두번째 인수를 생략하면 대상 문자의 끝까지 추출한다.
+
+
+
+// const str = ‘ Hello world! ’
+
+
+// colsole.log( str.slice ( 0, 5 ) )      // Hello    ( 0~4 번째까지의 문자만 출력 )
+// colsole.log( str.slice ( 6, -1 ) )     // world   ( 뒤에서 6~ -1 번째까지의 문자만 출력 ) -> -1은 마지막 문자이다.
+// colsole.log( str.slice ( 6 ) )           // world!  ( 6번째~마지막까지 출력 )  -> 2번째 인수가 없으면 끝까지 출력함.
+// colsole.log( str )                            // Hello world!   ( 0~4 번째까지의 문자만 출력 )
+
+
+
+
+// ** .split ( ) **
+
+// 설명 : 해당 대상 문자를 주어진 구분자로 나눠 배열로 반환합니다.
+
+
+// const str = ‘Apple’ , ‘Banana’ , ‘Cherry’
+
+// console.log( str.split ( ‘, ’ ) )        // [ ‘Apple’ , ‘Banana’ , ‘Cherry’ ] ->주어진 구분자 ‘, ’를 기준으로 나뉨
+//                                                                                                                 (띄어쓰기를 포함한 상태)
+
+// console.log( str.split ( ‘,’ ) )        // [ ‘Apple’ , ‘ Banana’ , ‘ Cherry’ ] ->주어진 구분자 ‘,’를 기준으로 나뉨
+//                                                                                                                 (띄어쓰기를 포함 안 한 상태)
+
+// console.log( str.split ( ‘ ’ ) )        // [ 모든 데이터 알파벳을 하나씩 나눈다 ]->빈배열은 기준이 전체로 잡힌다.
+
+
+// console.log( str.split ( ‘ ’ ).reverse )        // [ 모든 데이터 알파벳을 하나씩 나눈 후 반대로 모두 뒤집어 출력 ]
+
+
+// console.log( str.split ( ‘ ’ ).reverse.join ( ‘’ ) )   // [ yrrehC ,ananaB ,elppA ] ->전체 문자 데이터를 하나
+//                                                                                                                                  의 문자데이터로 조인
+//                                                                                                                                  ( 스플릿 반대 개념 )
+
+
+
+// .reverse : 배열 데이터의 순서대로 들어있는 아이템을 전부 반대로 뒤집어주는 메소드이다.
+
+
+// .join ( ‘’ ) : 배열의 아이템들을 전부 다 하나의 문자 데이터로 조인해주는 메소드이다.
+
+
+
+
+
+// ** .toLowerCase ( ) **
+
+// 설명 : 해당 대상 문자를 영어 소문자로 변환해 새로운 문자로 변환한다.
+//           ( 한글 부분에는 영향이 없다 )
+
+
+// const str = ‘ Apple, Banana, Cherry ’
+
+// console.log( str.toLowerCase ( ) )           // apple, banana, cherry
+// console.log( str )                                            // Apple, Banana, Cherry
+
+
+
+// ** .toUpperCase ( ) **
+
+// 설명 : 해당 대상 문자를 영어 대문자로 변환해 새로운 문자로 변환한다.
+//           ( 한글 부분에는 영향이 없다 )
+
+
+// const str = ‘ Apple, Banana, Cherry ’
+
+// console.log( str.toUpperCase ( ) )           // APPLE, BANANA, CHERRY
+// console.log( str )                                            // Apple, Banana, Cherry
+
+
+
+
+
+// ** .trim ( ) **
+
+// 설명 : 해당 대상 문자의 앞뒤 공백 문자 ( space, tab 등 )를 제거한 새로운 문자를 반환한다.
+//            ( 공백 공간이 중간에 만든 것은 해당되지 않는다 )
+
+
+// const str = ‘      HEROPY!      ’
+
+// console.log( str.trim ( ) )           //  ‘HEROPY!’    -> 공백 없이 출력
+// console.log( str )                          //  ‘      HEROPY!      ’
+// 표준 내장 객체 ( 숫자 및 수학 )
+
+
+
+
+
+// 숫자
+
+// ** .toFixed ( ) **
+
+// 설명 : 숫자를 지정된 고정 소수점 표기(자릿수)까지 표현하는 문자로 반환합니다.
+
+
+// const num = 3.1415926535
+
+// console.log( num.toFixed ( 2 ) )                                    // 3.14   문자데이터
+// console.log( parseFloat ( num.toFixed ( 2 ) ) )        // 3.14   숫자데이터
+
+
+
+// parseFloat ( ) : .toFixed ( ) 함수를 사용하게 되면 출력할 때 문자로 반환된 데이터를 숫자 데이터로 바꿔주는 메소드
+
+
+
+ 
+
+
+
+// ** .toLocaleString ( ) **
+
+
+// 설명 : 숫자를 현지 언어 형식의 문자로 반환한다.
+
+
+
+// const num = 1000000
+
+// console.log( num.toLocaleString(  ) )                                    //  1,000,000
+// console.log( ` $ { num.toLocaleString(  ) } 원` )                  //  1,000,000원  
+
+// # 단위를 적을 시 백틱기호 내부에 호출할 데이터를 작성하고 바로 뒤에 단위를 적을 수 있다.
+
+
+
+
+
+// ** Number.isInteger ( ) **
+
+
+// 설명 : 숫자가 정수 ( integer )인지 확인할 수 있다.
+//          앞에 클래스 필수
+
+
+
+// const num = 123
+// const pi = 3.14
+
+// console.log( Number.isInteger( num ) )                  //  true
+// console.log( Number.isInteger( pi ) )                       //  false  
+ 
+
+// # 메소드 앞에 클래스가 붙어있으면 정적메소드로 위 메소드는 넘버클래스 뒤에 붙여서 사용할 수 있다.
+
+
+
+
+
+// ** Number.isNaN ( ) **
+
+// 설명 : 주어진 값이 Not a Number 인지 확인하는 메소드이다.
+//          앞에 클래스 필수
+
+
+// const num 1 = NaN
+// const num 2 = 123
+// const str  = ‘Hello world’
+// const url  = null
+
+// console.log( Number.isNaN( num 1 ) )                   //  true
+// console.log( Number.isNaN( num 2 ) )                  //  false 
+// console.log( Number.isNaN( str ) )                        //  false 
+// console.log( Number.isNaN( url ) )                        //  false 
+
+
+// # 메소드 앞에 클래스가 붙어있으면 정적메소드로 위 메소드는 넘버클래스 뒤에 붙여서 사용할 수 있다.
+
+
+
+
+
+// ** Number.parseInt ( ) 또는 parseInt ( ) **
+
+// 설명 : 주어진 값( 숫자, 문자 )을 파싱( 분석 )해 특정 진수( radix )의 정수로 반환해준다. ( 모든 소수점 없이 출력 )
+//            앞에 클래스를 붙이지 않고 전역함수로도 사용 가능
+
+// parse : 분석하다
+// Int : 정수( 약어 )
+
+
+// const str = ‘3.1415926535’
+// const num = 3.1415926535
+
+
+// console.log( Number.parseInt ( str, 10 ) )           // 3         -> str의 데이터를 10진수로 만들어준다.
+// console.log( Number.parseInt ( num, 10 ) )        // 3         -> num의 데이터를 10진수로 만들어준다.
+//              ( Number 클래스가 없이 parseInt 함수만 만들어도 똑같다. )
+
+
+
+
+// ** Number.parseFloat ( ) 또는 parseFloat ( ) **
+
+
+// 설명 : 주어진 값( 숫자, 문자 )을 파싱( 분석 )해 부동소수점을 실수로 반환(숫자)한다. ( 소수점 모두 반환 )
+//            앞에 클래스를 붙이지 않고 전역함수로도 사용 가능
+
+
+
+// const str = ‘3.1415926535’
+// const num = 3.1415926535
+
+
+// console.log( Number.parseInt ( str ) )           // 3.1415926535         ->진수 표시 없이 데이터만 작성
+// console.log( Number.parseInt ( num ) )        // 3.1415926535\
+//              ( Number 클래스가 없이 parseInt 함수만 만들어도 똑같다. )
+
+
+
+
+
+
+
+// 수학
+
+
+// ** Math.abs ( ) **
+
+// Math : 수학적인 상수와 함수를 위한 속성 메소드를 가진 내장 객체이다.
+
+
+// 설명 : 주어진 숫자의 절댓값을 반환해준다.
+
+
+
+// console.log( Math.abs ( 2 ) )                   // 2
+// console.log( Math.abs ( -2 ) )                   // 2
+
+
+
+
+// ** Math.ceil ( ) **
+
+// 설명 : 주어진 숫자를 올림하여 정수를 반환해준다.
+
+
+
+// console. log( Math. ceil ( 3.1415926535 ) )                   // 4
+
+
+
+
+
+
+
+// ** Math.floor ( ) **
+
+// 설명 : 주어진 숫자를 내림하여 정수를 반환해준다.
+
+
+
+// console. log( Math. floor ( 3.1415926535 ) )                   // 3
+
+
+
+
+
+// ** Math.max ( ) **
+
+// 설명 : 주어진 숫자 중 음수를 포함하여 가장 큰 숫자를 반환해준다.
+
+
+
+// console. log( Math. max ( 1, 22, 38, 192 ) )                   // 192
+
+
+
+
+
+// ** Math.min ( ) **
+
+// 설명 : 주어진 숫자 중 음수를 포함하여 가장 작은 숫자를 반환해준다.
+
+
+
+// console. log( Math. min ( 1, 22, 38, 192 ) )                   // 1
+
+
+
+
+
+
+
+// ** Math.pow ( ) **
+
+// 설명 : 주어진 숫자의 거듭제곱한 값을 반환해준다.
+
+// pow : 거듭제곱
+
+
+// console. log( Math. pow ( 4, 2 ) )                   // 16                    4 * 4
+// console. log( Math. pow ( 7, 2 ) )                   // 49                    7 * 7
+// console. log( Math. pow ( 10, 3 ) )                   // 1000              10 * 10 = 100 _  100 * 10 = 1000
+
+
+
+
+
+
+// ** Math.random ( ) **
+
+// 설명 : 랜덤으로 숫자 0 이상, 1 미만의 난수를 반환해준다.
+
+
+
+// console. log( Math. random ( ) )                   // 0 과 1 사이의 소수점 결과 출력
+
+
+// @ 특정 범위의 랜덤 정수를 얻는 함수
+
+// function random ( min = 0, max = 10 ) {           - - - - - - - - - - -> 0 부터 10 까지를 기준으로 잡아준다.
+//       return Math.floor ( Math.random ( ) * ( max - min ) ) + min
+// }
+
+// console.log( random ( ) )                                  // 0과 10 사이의 랜덤 숫자 출력
+// console.log( random ( 11, 20 ) )                       // 11과 20 사이의 랜덤 숫자 출력
+// console.log( random ( 101, 999 ) )                  // 101과 999 사이의 랜덤 숫자 출력
+
+
+
+
+
+// ** Math.round ( ) **
+
+// 설명 : 주어진 숫자를 반올림해서 정수를 반환해준다.
+
+
+// const num 1 = 3.141
+// const num 2 = 3.768
+
+
+
+// console. log( Math. Sound ( num 1 ) )                   // 3
+// console. log( Math. Sound ( num 2 ) )                   // 4
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
