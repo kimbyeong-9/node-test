@@ -3359,6 +3359,341 @@
 // console. log( Math. Sound ( num 2 ) )                   // 4
 
  
+// 크기와 좌표
+
+
+
+// ** window.innerWidth / window.innerHeight **
+
+// 설명 : 현재 화면( Viewport )의 크기를 알아낼 수 있다.
+
+
+
+// <HTML파일>
+
+// <style>
+//     body {
+//          height: 1000px;
+//          padding: 500px 0;
+//     }
+//     .parent {
+//          width: 300px;
+//          height: 200px;
+//          margin-top: 1000px;
+//          padding: 20px;
+//          overflow: auto;
+//          border: 10px solid red;
+//     }
+//     .child {
+//          height: 100px;
+//          margin-top: 100px;
+//          border: 10px solid red;
+//     }
+// </style>
+
+
+
+// <JS파일>
+
+
+// console.log( window.innerWidth )          //  <div></div>
+// console.log( window.innerWidth )           //  <input>
+
+
+
+
+
+
+// ** window.scrollX / window.scrollY **
+
+// 설명 : 페이지의 좌상단 기준, 현재 화면( Viewport )의 수평 혹은 수직 스크롤 위치를 알아낼 수 있다.
+
+
+
+// <JS파일>
+
+// console.log( window.scrollX, window.scrollY )          //  스크롤 위치가 숫자로 나타냄
+
+
+
+
+
+// ** window.scrollTo / E.scrollTo **
+
+// 설명 : 지정된 좌표로 대상( 화면, 스크롤 요소 )을 스크롤해준다.
+//           // 대상.scrollTo ( X좌표, Y좌표 )
+//           // 대상.scrollTo ( { top: Y, left: X, behavior: ’smooth’ } )
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector( ‘.parent’ )
+
+// setTimeout ( ( ) => { 
+//   window.scrollTo ( {
+//        left: 0,
+//        top: 500,
+//        behavior: ’smooth’
+// }, 1000 )
+
+// console.log( window.scrollX, window.scrollY )          //  1초 뒤 smooth로 자연스럽게 지정한 위치로 스크롤 됨
+
+
+
+
+
+
+
+
+
+
+// ** E.clienWidth / E.clienHeight **
+
+// 설명 : 테두리 선 ( border )을 제외한 요소의 크기를 얻어준다.
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector( ‘.parent’ )
+// const childEl = document.querySelector( ‘.child’ )
+
+
+// console.log( parentEl.clienWidth, parentEl.clienHeight )          //  325 240
+// console.log( childEl.clienWidth, childEl.clienHeight )                 //  265 100  ( 스크롤바 15px 제외 )
+
+
+
+
+
+
+
+// ** E.offsetWidth / E.offsetHeight **
+
+// 설명 : 테두리 선 ( border )을 포함한 요소의 크기를 얻어준다.
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector( ‘.parent’ )
+// const childEl = document.querySelector( ‘.child’ )
+
+
+// console.log( parentEl.offsetWidth, parentEl.offsetHeight )          //  360 260
+// console.log( childEl.offsetWidth, childEl.offsetHeight )                 //  285 120  ( 스크롤바 15px 제외 )
+
+
+
+
+
+
+
+// ** E.scrollLeft / E.scrollTop **
+
+// 설명 : 스크롤 요소의 좌상단 기준, 현재 스크롤 요소의 수평 혹은 수직 스크롤 위치를 얻어준다.
+
+
+
+// <JS파일>
+
+// window.parentEl = document.querySelector ( ‘.parent’ )
+
+// console.log( parentEl.scrollLeft, parentEl.scrollTop )          //  스크롤 위치를 숫자로 나타냄
+
+
+
+
+
+
+
+
+// ** E.offsetLeft / E.offsetTop **
+
+// 설명 : 페이지의 좌상단 기준, 요소의 위치를 얻어준다.
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector( ‘.parent’ )
+// const childEl = document.querySelector( ‘.child’ )
+
+
+// console.log( parentEl.offsetLeft, parentEl.offsetTop )   // 전체 페이지 기준 요소의 위치가 출력
+// console.log( childEl.offsetLeft, childEl.offsetTop )        //  가장 위부터 요소의 위치가 출력 ( 마진과 테두리 제외 )
+
+
+
+
+
+
+
+// ** E.getBoundingClientRect **
+
+// 설명 : 테두리 선( border )을 포함한 요소의 크기와 화면에서의 상대 위치 정보를 얻어준다.
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector( ‘.parent’ )
+// const childEl = document.querySelector( ‘.child’ )
+
+
+// console.log( parentEl.getBoundingClientRect( ) )     // 요소 크기와 전체 페이지 기준 위치정보 출력 
+// console.log( childEl.getBoundingClientRect( ) )        //                        ‘’
+
+// 모듈 (Mobule)
+
+// 모듈 ( Module ) : 모듈이란 특정 데이터들의 집합(파일)이다.
+
+
+
+// 모듈 가져오기 및 모듈 내보내기
+
+// …자바스크립트 파일 내부…
+// export const hello = ‘Hello world!’;              -> export라는 키워드로 데이터를 내보낸다.
+
+
+
+// …다른 파일과 위 파일 연결 시 다른 파일 내부 …
+// import { hello } from ‘./module.js’                 -> import는 데이터를 가져오는 역할을 한다.
+
+// console.log(hello)                //  Hello world!
+
+
+// * 모듈을 사용하여 연결하고 싶을 땐 앞에 ‘ type= ‘을 부인 후 모듈이라 적어야한다.
+
+
+
+//  기본 내보내기
+
+
+// default : export 키워드로 데이터를 내보낼 때 디폴트를 사용할 수 있으며, 이를 우리는 기본 내보내기라고 말한다.
+//                   ( 내보내기를 한개만 가능하다 )
+
+
+// 예시 ) export default 123
+
+
+
+
+//  이름 내보내기
+
+// 설명 : 데이터들을 하나의 속성이름을 만들어 넣어주고 그 이름을 내보내서 여러개를 내보내준다.
+
+
+// export const str = ‘ABC’
+// export const arr = ‘[ ]’
+// export const function  hello ( ) { }
+
+
+// 가져오기
+
+
+// @위 코드 파일과 연결되어 있는 파일 내부
+// 1. 기본 내보내기 가져오기
+// import abc from ‘ . / 위 코드 파일 이름 ’
+
+// console.log( abc )                              //A B C  -> 다른이름( abc )을 지정하여 데이터( ABC )를 불러온다.
+
+
+// 2. 여러개를 가져오는 경우
+
+// 내보내기를 통하여 가져오기를 했을 때 가져올 속성 이름을  중괄호 안에 정확하게 적어서 가져와야한다.
+
+// import { str, arr, hello } from ‘ . / 위 코드 파일 이름 ’
+
+
+// console.log( str )                         // ABC
+// console.log( arr )                         // [ ] 
+// console.log( hello )                     // f hello  ( ) { }
+
+// 예시 ) import number, { str, arr, hello } from ‘ /. module.js ’
+//           ( 필요한 데이터만 가지고 올 수 있다.)
+
+
+
+// 3. 여러개를 가져올 때 속성 이름 바꾸는 방법
+
+// as : 가지고 올때는 가지고 오지만 사용할 때에는 이름을 바꿔서 쓸 수 있다.
+
+
+
+// import { str as xyz, arr, hello } from ‘ . / 위 코드 파일 이름 ’
+
+
+// console.log( str )                         // ABC  X
+
+// console.log( xyz )                         // ABC O
+
+
+
+
+// 4. 모듈 자바스크립트 파일에서 나오는 모든 테이터를 하나의 변수로 할당하여 사용하는 방법
+
+
+// import *as abc from ‘ . / 위 코드 파일 이름 ’
+
+
+// console.log( abc )                         // 모든 내용을 별표시를 사용해 출력
+
+
+// *(와일드카드): 여러개를 한번에 지정한다는 의미가 있는 기호다.
+
+
+
+
+
+// 동적으로 모듈 가져오기
+
+// import : import는 최상단에서만 불러올 수 있다( 최상단을 제외한 곳에서 부를 시 에러나옴 )
+
+
+
+// 중간에서 import하여 가져오는 방법
+
+// 예시)
+// import * as abc from ‘ ./ 불러올 파일이름’
+
+
+// setTimeout ( ( ) => {
+//     import ( ‘ ./ 불러올 파일이름’ ).then( abc  => {
+//       console.log( abc )
+//     } )
+//  }, 1000 )
+
+
+
+// acync, await
+
+
+// setTimeout ( acync ( ) => {
+//      const abc = await import ( ‘ ./ 불러올 파일이름’ )
+//      console.log( abc )
+// }, 1000 )
+
+// # 어씽크와 어웨잇으로도 위 코드와 같은 값으로 데이터를 가지고 올 수 있다.
+
+
+
+
+
+// 모듈 가져온 후 바로 내보내는 방법
+
+// 헌재 다른 이름의 a,b 파일이 존재하는 중
+
+// export { a } from ‘./ 불러올 파일이름’
+// export { b } from ‘./ 불러올 파일이름’       // a,b 에 적힌 값들이 출력
+
+// 설명 : 다른 데이터를 가지고 오자마자 바로 호출을 해주는 코드이다.
+
+
+
+
+
 
 
 
