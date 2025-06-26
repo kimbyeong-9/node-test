@@ -3690,6 +3690,701 @@
 
 // 설명 : 다른 데이터를 가지고 오자마자 바로 호출을 해주는 코드이다.
 
+// 이벤트 ( Events )
+
+
+// <HTML파일>
+
+// <style>
+//     .parent {
+//          width: 300px;
+//          height: 200px;
+//          padding: 20px;
+//          overflow: auto;
+//          border: 10px solid;
+//          background-color: red;
+//     }
+//     .child {
+//          width: 200px;
+//          height: 1000px;
+//          background-color: orange;
+//          border: 10px solid;
+//          font-size: 40px;
+//     }
+// </style>
+
+// <body>
+//      <div class = "parent” >
+//          <div class = "child” >
+//                  <a href = "http://heropy.blog” target= “_”blank >
+//                   HEROPY!
+//                  </a>
+//          </div>
+//      </div>
+//  <input  />
+// </body>
+
+// ” target= “_”blank : 해당 블로그 주소 페이지를 새 탭으로 오픈할때 사용한다.
+
+
+// 이벤트 추가 및 제거 
+
+
+// ** .addEventListener ( ) **
+
+// 설명 : 대상의 이벤트 청취 ( Listen )를 등록해준다.
+//           대상에 지정한 이벤트가 발생했을 때 지정한 함수 ( Handler )가 호출된다.
+
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+// const childEl = document.querySelector ( ‘.child’ )
+
+// parentEl.addEventListener ( ‘click’, ( ) => { 
+//    console.log( ‘Parent!’ )
+// } )                                                                                          //  해당 요소 클릭 시 ‘Parent!’ 출력
+// childEl.addEventListener ( ‘click’, ( ) => { 
+//    console.log( ‘Child!’ )
+// } )                                                                                          //  해당 요소 클릭 시 ‘Child!’ ,  ‘Parent!’ 출력
+//                                                                                          ( 위 코드 내부에 해당 요소가 들어있으므로 둘다 출력  )
+
+
+
+
+
+
+// ** .removeEventListener ( ) **
+
+// 설명 : 대상에 등록했던 이벤트 청취 ( Listen )를 제거해준다.
+//           메모리 관리를 위해 등록한 이벤트를 제거하는 과정이 필요할 수 있다.
+
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+// const childEl = document.querySelector ( ‘.child’ )
+
+// const handler = ( ) => {   
+//    console.log( ‘Parent!’ )                          //  제거 !!
+// }
+
+// parentEl.addEventListener ( ‘click’, handler )
+// childEl.addEventListener ( ‘click’, ( ) => { 
+//    parentEl.removeEventListener ( ‘click’, handler )
+// } ) 
+
+
+
+
+
+// 이벤트 객체
+
+
+
+// ** 이벤트 객체**
+
+// 설명 : 이벤트 객체는 대상에서 발생한 이벤트 정보를 담고 있다.
+
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+
+
+// parentEl.addEventListener ( ‘click’, event => {
+//        console.log( event.target, event.currentTarget )            // <div class = "parent”></div>
+//                                                                                                                      <div class = "parent”></div>
+
+//                                                                                                                      <div class = "child”></div>
+//                                                                                                                      <div class = "parent”></div>
+
+//        console.log( event )
+//  } )
+//  parentEl.addEventListener ( ‘wheel’, event => {
+//         console.log( event )                                                          //  다양한 휠 이벤트 출력
+// } )
+
+// const inputEl = document.querySelector ( ‘keydown’, event => {
+//      Console.log( event.key )                                                          //  검색창에 커서를 두고 키보드 클릭시 해당 키 명 출력
+// } )
+
+
+// .target : 이벤트가 발생한 해당 요소를 의미
+
+
+// .currentTarget : 이벤트가 등록된 요소를 의미
+
+
+// wheel : 마우스의 가운데 버튼을 움직이면 나타나는 이벤트이다.
+
+
+// keydown : 키보드 버튼을 클릭하면 다운되는 이벤트이다.
+
+
+
+
+
+
+// 기본 동작 방지
+
+
+
+// ** 기본 동작 방지 **
+
+// 설명 : 브라우저에 제공이 되며, 위아래 스크롤 하거나 a 태그를 클릭 시 페이지 이동하는것들을 기본 동작이라 하며,
+//            그것을 방지해주는 역할이 .preventDefalit ( )이다.
+
+
+
+
+// <JS파일>
+
+
+// // 마우스 휠의 스크롤 동작 방지!
+// const parentEl = document.querySelector ( ‘.parent’ )
+// parentEl.addEventListener ( ‘wheel’, event => {
+//   event.preventDefalit ( )                                              // 요소에 스크롤 시 문자는 출력되지만 실제화면은 안움직인다.
+//   console.log ( ‘wheel!’ )                                                        // 해당 요소에 스크롤을 하면 스크롤 횟수와 wheel! 출력
+// } )
+
+
+// // <a>태그에서 페이지 이동 방지!
+// const anchorEl = document.querySelector ( ‘a’ )
+// anchorEl.addEventListener ( ‘click’, event => {
+//     event.preventDefalit ( )                                              //  요소에 클릭 시 문자는 출력되지만 실제화면은 안움직인다.
+//     console.log ( ‘Click!!’ )                                               // 요소 클릭 시  Click!! 출력
+// } )
+
+
+// .preventDefalit ( ) : 실제 동작을 없애는 것이 아니라 보여지는 화면에서만 동작을 하지 않게 만들어주는 메소드이다.
+
+
+
+// 이벤트 전파(버블 ) 정지
+
+
+
+// ** 이벤트 전파( 버블 ) 정지 **
+
+// 설명 : 이벤트를 전파할 때는 가장 자식 요소부터 출력되며 그것을 버블링이라고 부르며, 이벤트 버블링을 
+//           멈춰주는 ‘.stopPropagation ( )’ 가 있다.
+
+
+
+
+// <JS파일>
+
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+// const childEl = document.querySelector ( ‘.child’ )
+// const anchorEl = document.querySelector ( ‘.a’ )
+
+// window.addEventListener ( ‘click’, event => {
+//    console.log ( ‘Window!’ )                                      //  버블링 기능으로 출력 안됨
+// } )
+// document.body.addEventListener ( ‘click’, event => {
+//    console.log ( ‘Body!’ )                                            // 버블링 기능으로 출력 안됨
+// },{ capture: true } )    -> 먼저 출력 !
+// parentEl.body.addEventListener ( ‘click’, event => {
+//    console.log ( ‘Parent!’ )                                         // 이어서 Parent! 출력
+//    event.stopPropagation ( )  -> 버블링!
+// } )
+// childEl.body.addEventListener ( ‘click’, event => {
+//    console.log ( ‘Child!’ )                                             // 이어서 Child! 출력 ( 해당 요소 클릭 시 이 요소부터 출력 시작 )
+// } )
+// anchorEl.body.addEventListener ( ‘click’, event => {
+//    console.log ( ‘Anchor!’ )                                         // 요소 클릭 시 Anchor! 출력
+// } )
+
+// 이벤트 버블링 : 점점 넓어지는 범위 순으로 출력된다.( 가장 자식 요소부터 출력되는 개념  )
+//                          만약 중간쯤 위치에 있는 요소를 클릭 한다면 그 요소부터 출력 시작
+
+
+// .stopPropagation ( ) : 이벤트가 상위요소로 전파( 버블링 )되는 것을 정지 시키는 메소드이다.
+
+
+// capture: true : 해당 요소 먼저 동작하게 해준 후 남은 요소들을 순서대로 출력해준다.
+//                              이 메소드가 2개를 사용할 경우 큰 요소부터 먼저 출력된다.
+
+
+
+// @ 이벤트 전파 ( 버블 ) 정지 2번째 예제
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+
+// const handler = ( ) => {
+//   console.log( ‘Parent!’ )                                      // Parent!!
+//  }
+
+// parentEl.addEventListener ( ‘click’, handler,
+    
+// { capture: true
+//  } )
+// parentEl.removeEventListener ( ‘click’, handler )
+
+// ( remove를 통해 해당 요소를 제거해도 제거’할 요소에capture: true’가 있으면 제거되지 않는다. )
+
+
+
+
+
+
+// 핸들러 한 번만 실행
+
+
+
+// ** 핸들러 한 번만 실행 **
+
+// 설명 : once: true 메소드로 한번만 실행하고 더 이상 실행되지 않게 해준다. 클릭 이벤트로는 두 번째 클릭 시 실행 안 됨
+
+
+
+
+// <JS파일>
+
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+
+
+// parentEl.addEventListener ( ‘click’, event => {
+//    console.log ( ‘Parent!’ )                                      // 
+// }, {
+//    once: true   -> 딱 한번 실행! ( 더 클릭해도 실행 안됨 )
+// } )
+
+
+// once: true : 두 번째 인수로 들어가는 콜백함수, 즉 핸들러 함수를 한 딱 번만 실행하게 해준다.
+
+
+
+
+
+
+
+// 기본 동작과 핸들러 실행 분리
+
+
+
+// ** 기본 동작과 핸들러 실행 분리 **
+
+// 설명 :  passive: true를 통해 요소 동작과 핸들러 실행을 분리하여 보이는 화면 기능을 더 부드럽게 나타낼 수 있다.
+
+
+
+
+// <JS파일>
+
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+
+
+// parentEl.addEventListener ( ‘wheel’, ( ) => {
+//     for ( let I = 0; i < 10000; i += 1 ) {
+//    console.log ( i )                                      // 
+//   }
+// }, {
+//    passive: true   -> 천 번째 인수, 두 번째 인수 분리!
+// } )
+
+
+// passive: true : 요소의 동작과 핸들러의 실행을 분리해준다.
+
+
+
+
+
+
+
+// 이벤트 위임 ( Delegation )
+
+
+
+// ** 이벤트 위임( Delegation ) **
+
+// 설명 :  비슷한 패턴의 여러 요소에서 이벤트를 핸들링해야 하는 경우,
+//            단일 조상 요소에서 제어하는 이벤트 위임 패턴을 사용할 수 있다.
+
+
+
+
+// <HTML파일>
+
+
+// <div class = "parent” >
+//       <div class="child”>1</div>
+//       <div class="child”>2</div>
+//       <div class="child”>3</div>
+//       <div class="child”>4</div>
+// </div>
+
+
+
+// <JS파일>
+
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+// const childEls = document.querySelectorAll ( ‘.child’ )
+
+// // 모든 대상 요소에서 이벤트 등록!
+
+// childEls.forEach ( el => {
+//    El.addEventListener ( ‘click’, event => {
+//       console.log( event.target.textContent )                   // 클릭 시 1 2 3 4 순서대로 출력
+//    } )
+// } )
+
+
+// // 조상 요소에 이벤트 위임!
+
+//  parentEl.addEventListener ( ‘click’, event => {
+//      const childEl = event.target.closest ( ‘.child’ )
+//          if ( childEl ) {
+//        console.log( childEl.textContent )                          //  클릭 시 1 2 3 4 순서대로 출력
+//      }
+// } )
+
+
+// .closest ( ) : 대상 요소의 선택자와 일치하는 가장 가까운 조상 요소를 찾는다.  
+
+
+
+
+
+
+
+
+
+
+// Mouse & pointer Events
+
+
+
+// ** Mouse & pointer Events **
+
+
+
+// <HTML파일>
+
+// <style>
+//     .parent {
+//          width: 300px;
+//          height: 200px;
+//          padding: 20px;
+//          overflow: auto;
+//          border: 10px solid;
+//          background-color: red;
+//     }
+//     .child {
+//          width: 200px;
+//          height: 1000px;
+//          background-color: orange;
+//          border: 10px solid;
+//     }
+// .child.active {
+//          background-color: yellowgreen;
+//     }
+// </style>
+
+// <body>
+//      <div class = "parent” >
+//           <div class = "child” ></div>
+//      </div>
+// </body>
+
+
+
+// <JS파일>
+
+
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+// const childEl = document.querySelectorAll ( ‘.child’ )
+
+// // click                                     | 클릭했을 때
+// childEl.addEventListener ( ‘click’, ( ) => { 
+//       childEl.classList.toggle ( ‘active’ )   -> child부분을 클릭 시 지정한 active( 옐로우그린 )색상으로 바뀜
+// } )                                                                                         ( 다시 누를 시 원상 복구 )
+
+
+// // dblclick                               | 더블 클릭했을 때
+// childEl.addEventListener ( ‘dblclick’, ( ) => { 
+//       childEl.classList.toggle ( ‘active’ )   -> child부분을 더블 클릭 시 지정한 active( 옐로우그린 )색상으로 바뀜
+// } )                                                                                         ( 다시 누를 시 원상 복구 )
+
+// // mousedown                       | 버튼을 누를 때
+// childEl.addEventListener ( ‘mousedown’, ( ) => { 
+//       childEl.classList.add ( ‘active’ )   -> child부분을 누르고 있을 때 지정한 active( 옐로우그린 )색상으로 바뀜
+// } )    
+
+// // mouseup                             | 버튼을 뗄 때
+// childEl.addEventListener ( ‘mouseup’, ( ) => { 
+//       childEl.classList.remove ( ‘active’ )   -> child부분을 뗄 때 지정한 오랜지색상으로 돌아옴
+
+
+// // mouseenter                       | 포인터가 요소 위로 들어갈 때
+// childEl.addEventListener ( ‘mouseenter’, ( ) => { 
+//       childEl.classList.add ( ‘active’ )   
+//      } )           -> child부분에 마우스커서가 들어가 있을 때 지정한 active( 옐로우그린 )색상으로 바뀜
+   
+
+// // mouseleave                       | 포인터가 요소 밖으로 나올 때
+// childEl.addEventListener ( ‘mouseleave’, ( ) => { 
+//       childEl.classList.remove ( ‘active’ )   
+//      } )           -> child부분에 마우스커서가 밖에 나갈 때 지정한 오렌지색상으로 돌아옴
+
+// // mousemove                        | 포인터가 움직일 때
+
+// childEl.addEventListener ( ‘mousemove’, event => { 
+//     console.log( event )          -> child부분에 마우스커서가 움직일 때 마우스 이벤트 객체가 출력됨
+//      } ) 
+
+// // contextmenu                      | 우클릭 했을 때
+
+// childEl.addEventListener ( ‘contextmenu’, event => { 
+//     console.log( event )          -> child부분에 마우스 우클릭 시 특정한 메뉴가 나오며 마우스 이벤트 객체가 출력됨
+//      } ) 
+
+// // wheel                                    | 휠 버튼이 회전할 때
+
+// parentEl.addEventListener ( ‘wheel’, event => { 
+//     console.log( event )          -> parenr요소 위에서 마우스 휠을 움직일 때 마우스 휠 이벤트 객체가 출력됨
+//      } ) 
+
+// window.addEventListener ( ‘wheel’, event => { 
+//     console.log( event )          -> 윈도우에서 마우스 휠을 움직일 때 마우스 휠 이벤트 객체가 출력됨
+//      } ) 
+
+
+
+
+
+// Keyboard Event
+
+
+
+// ** Keyboard Event **
+
+
+
+
+// <HTML파일>
+
+// <body>
+//      <input type ="text” />
+// </body>
+
+
+
+// <JS파일>
+
+
+// // keydown                                   | 키를 뗄 때
+// const inputEl = document.querySelector ( ‘input’ )
+
+// inputEl.addEventListener ( ‘ketdown’, event => {
+//    console.log( event, key )                                          // 키보드를 클릭 시 해당 키네임 출력
+// } )
+
+// // keyup                                        | 키를 누를 때
+// const inputEl = document.querySelector ( ‘input’ )
+
+// inputEl.addEventListener ( ‘ketup’, event => {
+//    console.log( event, key )                                          // 키보드를 뗄 때 해당 키네임 출력
+// } )
+
+// // 내용을 적어 엔터를 때
+// const inputEl = document.querySelector ( ‘input’ )
+
+// inputEl.addEventListener ( ‘ketup’, event => {
+//    if( event.key === ‘Enter’ && !event.isComposing ) { 
+//        console.log ( event.isComposing )                // 검색창에 적은 내용이 한 번만 출력
+//        console.log ( event.target.value )                  // 검색창에 적은 내용을 적은 뒤 엔터를 누르면 출력
+//     }
+// } )
+
+//  CJK문자 : 중국어, 일본어, 한국어 통틀어 이르는 말이다
+
+// isComposing : CJK문자를 처리하는 과정인지 블린데이터로 가지고 있는 속성이다
+
+
+
+
+
+
+
+// Focus & Form Events
+
+
+
+// ** Focus & Form Events **
+
+
+
+
+// <HTML파일>
+
+
+// < style >
+//      form {
+//           padding: 10px;
+//           border: 4px solid transparent;
+//           display: flex;
+//           flex-wrap: wrap;
+//           gap: 6px;
+// }
+// form.active {
+//      Border-color: orange;
+// }
+// < /style >
+
+
+
+// <body>
+//     <form>
+//           <input type = "text” placeholder = "ID” />
+//           <input type = "password” placeholder = “PW” />
+//           <button type = “submit”>제출</button>
+//           <button type = “reset”>초기화</button>
+//    </form>
+// </body>
+
+
+
+// <JS파일>
+
+
+// // focus                                   | 요소가 포커스를 얻었을 때
+// // blur                                      | 요소가 포커스를 잃었을 때
+// // input                                    | 값이 변경되었을 때
+// // change                               | 상태가 변경되었을 때
+// // submit                                | 제출 버튼을 선택했을 때
+// // reset                                   | 리셋 버튼을 선택했을 때
+
+
+
+
+
+
+// const formEl = document.querySelector ( ‘form’ )
+// const inputEl = document.querySelectorAll ( ‘input’ )
+
+// inputEls.forEach ( el => {
+//    el.addEventListener ( ‘focus’, ( ) => { 
+//        formEl.classList.add ( ‘active’ )
+//    } )
+// el.addEventListener ( ‘blur’, ( ) => { 
+//        formEl.classList.remove ( ‘active’ )
+//    } )
+// el.addEventListener ( ‘input’, event => {                                     <연속으로 1 2 3 을 클릭 시>
+//        console.log ( event.target.value )                                 // 1, 12, 123 (값이 입력 될 때마다 출력)
+//    } )
+// } )
+
+// el.addEventListener ( ‘change’, event => { 
+//        console.log ( event.target.value )                                 // 123 ( 내용을 변경 후 엔터를 누르면 출력)
+//    } )
+// } )
+
+// formEl.addEventListener( ‘submit’, event => {
+//      event.preventDefault ( )
+//      const data = {
+//             id: evnet.target [0].value,
+//             pw: evnet.target [1].value
+//     }
+//   console.log( ‘제출!’, data )                                 // 123 ( 내용을 변경 후 엔터를 누르면 출력)
+// } )
+
+// ( submit이벤트가 발생되면 새로 고침이 기본동작이다. )
+
+// .preventDefault ( ) : 서브밋에 새로고침 되는 것을 동작하지 않도록 만들어주는 메소드이다.
+
+
+// formEl.addEventListener( ‘reset’, event => {
+//      console.log( ‘리셋!’ )                                 // 초기화 버튼 누를 시 input창 안에 적힌 내용을 지워주며 ‘리셋!’이 출력됨
+// } )
+
+
+
+
+
+
+
+// 커스텀 이벤트와 디스패치
+
+
+
+// ** 커스텀 이벤트와 디스패치 **
+
+
+// 디스패치
+
+// <HTML파일>
+
+// <body>
+//     <div class = "parent”>
+//           <div class = “child”>1</div>
+//           <div class = "child”>2</div>
+//    </div>
+// </body>
+
+
+// <JS파일>
+
+
+// const child1 = document.querySelector ( ‘.child:nth-child ( 1 ) ’ )
+// const child2 = document.querySelector ( ‘.child:nth-child ( 2 ) ’ )
+
+// child1.addEventListener( ‘click’, event => {
+// // 강제로 이벤트 발생!
+//    child2.dispatchEvent ( new Event ( ‘click’ ) )
+//    child2.dispatchEvent ( new Event ( ‘wheel’ ) )
+//    child2.dispatchEvent ( new Event ( ‘keydown’ ) )
+// } )
+// child2.addEventListener( ‘click’, event => {                                                 < 클릭 시 >
+//      console.log( ‘child2 Click!’ )                                     // child2 Click!, child2 Wheel!, child2 Keydown! 출력
+// } )
+// child2.addEventListener( ‘wheel’, event => { 
+//      console.log( ‘child2 Wheel!’ )
+// } )
+// child2.addEventListener( ‘keydown’, event => { 
+//      console.log( ‘child2 Keydown!’ )
+// } )
+
+
+// dispatchEvent : 인수로 생성자 함수(new)를 만들어 해당 이름을 적어주면 강제로 이벤트를 동작시킬 수 있다.
+
+
+
+// 커스텀
+
+
+
+// <JS파일>
+
+
+// const child1 = document.querySelector ( ‘.child:nth-child ( 1 ) ’ )
+// const child2 = document.querySelector ( ‘.child:nth-child ( 2 ) ’ )
+
+// child1.addEventListener( ‘hello-world’, event => {
+//  console.log( ‘커스텀 이벤트 발생!’ )
+//  console.log( event.detail )
+// } )
+// child2.addEventListener( ‘click’, ( ) => {
+//      child1.dispatchEvent( new CustomEvent( ‘hello-world’ {       
+//                                 // 2번 클릭 시 1번에 적용된 커스텀 이벤트 발생! 출력
+//                  detail: 123                                             // 123 (디테일 값 출력)
+// } ) )
+// } )
+
+// CustomEvent 생성자함수 : 두 번째 인수에 객체 데이터로 해당 속성을 적은 뒤 그 속성에 원하는 데이터를 추가할 수 있다.
+
 
 
 
