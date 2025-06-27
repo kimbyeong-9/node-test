@@ -4385,7 +4385,587 @@
 
 // CustomEvent 생성자함수 : 두 번째 인수에 객체 데이터로 해당 속성을 적은 뒤 그 속성에 원하는 데이터를 추가할 수 있다.
 
+// 생성, 조회, 수정 
 
+
+// ** document.createElement ( ) **
+
+// 설명 :메모리에만 존재하는 새로운 HTML 요소를 생성해 반환합니다.
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+
+// <JS파일>
+
+// const divEl = document.createElement ( ‘div’ )
+// console.log( divEl )                                                    //  <div></div>
+
+// const inputEl = document.createElement ( ‘input’ )
+// console.log( inputEl )                                                    //  <input>
+
+
+
+
+
+
+// ** E.prepend ( ),E.append ( ) **
+
+// 설명 : 노드를 요소의 첫 번째 혹은 마지막 자식으로 삽입해준다.
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+
+// <JS파일>
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+
+// const el = document.createElement ( ‘div’ )
+// el.textContent = ‘Hello~’
+
+// parentEl.prepend ( new Comment ( ‘ 주석 ’ ) )                      < - - 주석 - ->
+// parentEl.append ( el,  Text!! ’)                                             //   <div class="parent">
+//                                                                                                     <div class="child">1</div>
+//                                                                                                     <div class="child">2</div>
+//                                                                                                     <div> Hello~ </div>
+//                                                                                                     “Text!!”
+//                                                                                                     </div>
+   
+
+
+// ** E.remove ( ) **
+
+// 설명 : 요소를 제거합니다.
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.querySelector ( ‘.child’ )
+
+// el.remove ( )                                                        //   <div class="parent">
+//                                                                                <div class="child">2</div>
+//                                                                                </div>
+//                                                                                                    (   <div class="child">1</div> 부분 사라짐 )
+
+
+
+
+
+
+// ** E.insertAdjacentElement ( ) **
+
+// 설명 : ‘대상 요소’의 지정한 위치에 ‘새로운 요소’ 를 삽입해준다.
+//            ( 대상_요소.insertAdjacentElement ( 위치, 새로운_요소 )
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+// /* html */ `
+// <!- - ‘beforebegin’ - ->
+// <div class = 'target’ >
+
+// <!- - ‘afterbegin’ - ->
+// Content !
+
+// <!- - ‘beforeend’ - ->
+// </div>
+
+// <!- - ‘afterend’ - ->`
+
+// const childEl = document.querySelector ( ‘.child’ )
+// const newEl = document.createElement ( ‘.child’ )
+// newEl.textContent = ‘Hello~’
+
+// childEl.insertAdjacentElement ( ‘beforebegin’, newEl )               //  <div class="parent">
+//                                                                                                                                <span>Hello~</span>
+//                                                                                                                     <div class="child">1</div>
+//                                                                                                                     <div class="child">2</div>
+//                                                                                                                     </div>
+
+
+
+
+
+// ** N.insertBefore ( ) **
+
+// 설명 : ‘부모 노드’의 자식인 ‘참조 노드’의 이전 형제로 ‘노드’를 삽입해준다.
+//            ( 부모_노드.insertBefore ( 노드, 참조_노드 ) )
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+// const childEl = document.querySelector ( ‘.child’ )
+// const newEl = document.createElement ( ‘span’ )
+// newEl.textContent = ‘Hello~’
+
+// parentEl.insertBefore ( newEl, childEl )               //  <div class="parent">
+
+
+
+
+
+// ** N.contains ( ) **
+
+// 설명 : ‘주어진 노드’가 ‘노드’의 자신을 포함한 후손인지 확인해준다.
+//            ( 노드.contains ( 주어진_노드 ) )
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+// const childEl = document.querySelector ( ‘.child’ )
+
+// console.log( parentEl.contains ( childEl ) )                                      // true       -> 후손 요소
+// console.log( document.body.contains ( parentEl ) )                     // true               ‘’
+// console.log( document.body.contains ( childEl ) )                         // true               ‘’
+// console.log( document.body.contains ( document.body ) )       // true       -> 자신
+// console.log( parentEl.contains ( parentEl ) )                                    // true       -> 자신
+// console.log( parentEl.contains ( document.body ) )                      // false     -> 자식 요소 아님
+// console.log( childEl.contains ( document.body ) )                          // false     -> 자식 요소 아님
+
+
+
+
+
+
+// ** N.textContent **
+
+// 설명 : 노드의 모든 텍스트를 얻거나 변경해준다.
+
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el = document.querySelector ( ‘.child’ )
+// console.log( el.textContent )                                         //  1
+
+
+// el.textContent = ‘7’
+// console.log( el.textContent )                                        //  7
+
+
+
+
+
+
+// ** E.innerHTML**
+
+// 설명 : 요소의 모든 HTML 내용을 하나의 문자로 얻거나, 새로운 HTML을 지정해준다.
+
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el = document.querySelector ( ‘.parent’ )
+// console.log( el.innerHTML )                                         // <div class="child">1</div>
+//                                                                                            <div class="child">2</div>
+
+// el.innerHTML = ‘< span style = "color: red;”>Hello~</span >’
+
+// el.innerHTML = /* html */
+// `<div style = "border: 4px solid;” >
+//      < span style = "color: red;”>Hello~</span >
+//      < span style = "color: red;”>Hello~</span >
+// </div>`
+
+// @ innerHTML속성을 사용하면 document.crearteElement 을 사용 안해도 해당 요소의 내용으로 삽입을 할 수 있다.
+//     (많이 사용함)
+
+
+
+
+// ** E.dataset **
+
+// 설명 : 요소의 각 `data-` 속성 값을 얻거나 지정해준다.
+
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el = document.querySelector ( ‘.child’ )
+// const str = ‘ Hello world! ’
+// const obj = { a: 1, b: 2 }
+
+// el.dataset.helloWorld = str
+// el.dataset.object = JSON.stringify( obj )
+
+// console.log( el.dataset.helloWorld )
+// console.log( el.dataset.object )
+// console.log( JSON.parse ( el.dataset.helloWorld ) )   
+
+
+// JSON.stringify( obj ) : 인수로 들어오는 데이터를 전부 다 문자화 변경해준다.
+
+// JSON.parse ( ) 메소드 : 문자화된 데이터를 실제 자바스크립트 데이터로 다시 변환해준다.
+
+
+// //    Hello world!
+//       { “a”: 1, “b”: 2 }  -> 문자화된 객체데이터
+//       { a: 1, b: 2 }        -> 객체로 변경된 객체 데이터
+
+
+
+// //    <div class="parent">
+//       <div class="child" data-hello-world = “Hello world”  data-object = “{ a: 1, b: 2 }” >1</div>
+//       <div class="child">2</div>
+//       </div>
+
+
+
+
+
+
+// ** E.tagName **
+
+// 설명 : 요소의 태그 이름을 반환해준다.
+
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const parentEl = document.querySelector ( ‘.parent’ )
+// const childEl =  document.querySelector ( ‘.child’ )
+// const el =  document.crearteElement ( ‘ span ’ )
+
+// console.log( parentEl.tagName )                             //  DIV
+// console.log( childEl.tagName )                                 //  DIV
+// console.log( el.tagName )                                           //  SPAN
+// console.log( document.body.tagName )               //  BODY
+
+
+
+
+
+// ** E.id **
+
+// 설명 : 요소의 `id` 속성 값을 얻거나 지정해준다.
+
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el =  document.querySelector ( ‘ .child ’ )
+// console.log( el.id )                       //  빈문자 출력
+
+// el.id = ‘child1’
+// console.log( el.id )                        //  child1
+// console.log( el )                             //  DIV
+
+
+// HTML 파일 내부
+
+//  //   <div class="child" id = "child1” >1</div>
+
+
+
+
+
+// ** E.className **
+
+// 설명 : 요소의 `class` 속성 값을 얻거나 지정해준다.
+
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el =  document.querySelector ( ‘ .child ’ )
+// console.log( el.className )                       //  child
+
+// el.className += ‘child1 active’
+// console.log( el.className )                       //  child child1 active
+// console.log( el )                                              //  <div class="child child1 active">1</div>
+
+
+
+
+
+
+// ** E.classList **
+
+// 설명 : 요소의 `class` 속성 값을 제어해준다.
+
+// - `.add ( )`: 새로운 값을 추가
+// - `.remove ( )`: 기존 값을 제거
+// - `.toggle ( )`: 값을 토글
+// - `.contains ( )`: 값을 확인
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el =  document.querySelector ( ‘ .child ’ )
+
+// el.classList.add ( ‘active’ )
+// console.log( el.classList.contains ( ‘active’ ) )                       // true  <div class="child active”>1</div>
+
+// el.classList.remove ( ‘active’ )
+// console.log( el.classList.contains ( ‘active’ ) )                       // false  <div class="child”>1</div> (삭제됨)
+
+// el.addEventListener ( ‘click’, ( ) => { 
+//   el.classList.toggle ( ‘active’ )
+//    console.log( el.classList.contains ( ‘active’ ) )                     //  child
+// } )
+
+
+
+
+
+// ** E.style **
+
+// 설명 : 요소의 `style` 속성( 인라인 스타일 )의 CSS 속성 값을 얻거나 지정해준다.
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el =  document.querySelector ( ‘ .child ’ )
+
+
+// 개별 지정!
+// el.style.width = ‘100px’
+// el.style.width.fontSize = ‘20px’
+// el.style.width.backgroundColor = ‘green’
+// el.style.width.psition = ‘absolute’
+
+
+// 한 번에 지정!
+// Object.assign( el.style, {
+//      width: ‘100px’,
+//      fontSize: ‘20px’,
+//      backgroundColor: ‘green’,
+//      position: ‘absolute’
+// })
+
+
+// ( 위 코드 중 한 두개만 스타일 지정을 할때는 개별이 편하지만 여러개가 있다면 한번에 지정하는 방법이 유용하다)
+
+
+// console.log( el.style )                                                // 
+// console.log( el.style.width )                                    // 100px
+// console.log( el.style.fontSize )                               // 20px
+// console.log( el.style.backgroundColor )             // green
+// console.log( el.style.position )                               // absolute
+
+
+
+
+
+
+// ** window.getComputedStyle ( ) **
+
+// 설명 : 요소에 적용된 스타일 객체를 반환해준다.
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el =  document.querySelector ( ‘ .child ’ )
+// const styles =  window.getComputedStyle ( el )
+
+// console.log( styles.width )                                     // 100px
+// console.log( styles.fontSize )                                // 20px
+// console.log( styles.backgroundColor )              // rgb( 0, 128, 0 )
+// console.log( styles.position )                                // absolute
+
+
+
+
+
+
+
+
+
+// ** E.getAttribute ( ) / E.setAttribute ( ) **
+
+// 설명 : 요소에서 특정 속성 값을 얻거나 지정해준다.
+
+// Attribute : HTML 속성을 지정할 때 사용하는 영어단어
+
+// property : CSS 혹은 자바스크립트 속성을 지정할 때 사용하는 영어단어
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el =  document.querySelector ( ‘ .child ’ )
+
+
+// el.setAttribute ( ‘title’ , ‘Hello World!’ )
+// console.log( el.getAttribute( ‘title’ ) )                                // Hello World! 
+
+
+
+
+
+
+
+
+// ** E.hasAttribute ( ) / E.removeAttribute ( ) **
+
+// 설명 : 요소에서 특정 속성을 확인하거나 제거해준다.
+
+
+// has : HTML 속성이 들어있는지 않은지 확인하는 영어단어
+
+// property : 속성을 제거할 때 사용하는 영어단어
+
+
+
+
+
+// <HTML파일>
+//     <div class="parent">
+//         <div class="child">1</div>
+//         <div class="child">2</div>
+//     </div>
+
+
+// <JS파일>
+
+
+// const el =  document.querySelector ( ‘ .child ’ )
+
+// console.log( el.hasAttribute( ‘class’ ) )                                // true
+
+// el.removeAttribute ( ‘class’ )    -> 속성 제거
+// console.log( el.hasAttribute( ‘class’ ) )                                // false
+
+
+// console.log( el )                                                                           // <div>1</div>
 
 
 
