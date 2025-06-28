@@ -4967,6 +4967,368 @@
 
 // console.log( el )                                                                           // <div>1</div>
 
+// DOM( Document Object Model )
+// 검색과 탐색
+
+
+
+// DOM이란? : HTML 문서를 객체로 표현한 것, JS에서 HTML을 제어할 수 있게 해줍니다.
+// DOM API : 사용할 수 있는 다양한 명령들
+
+
+
+// const element = document.querySelector( ‘h1’ )
+// console.log( element.textContent )      // Hello world!
+
+
+
+
+
+
+// ** Node vs Element **
+
+// 설명 :  노드(Node)라는 것은  요소(Element)라는 객체에서 상속되어 만들어진 개념이다.
+//            결국 하나의 요소는 하나의 노드이고, 그 노드에서 상속(파생)된 객체이다. 즉 노드가 요소보다 더 상위 개념이다.
+
+//  노드(Node) : HTML 요소, 텍스트, 주석 등 모든 것을 의미
+//  요소(Element): HTML 요소를 의미
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const parent = document.querySelector('./parent')
+
+// ( 부모 요소의 모든 자식 노드 확인! )
+// console.log(parent.childNodes)              // 모든 노드 요소가 출력 ( 노드 )
+
+// ( 부모 요소의 모든 자식 요소 확인! )
+// console.log(parent.children)                   // 
+
+
+
+// @ Node vs Element 2번째 예제
+
+
+// class N { }
+// class E extends N { }  -> N 상속 받는 E
+
+// console.dir( E )                                            // class E
+// console.dir( N )                                           // class N
+// console.dir( E.__proto__ )                        // class N
+
+// console.dir( Element )                               // f Element ( )
+// console.dir( Node )                                    // f Node ( )
+// console.dir( Element.__proto__ )           // f Node ( )
+
+
+
+
+
+// 검색과 탐색
+
+
+// ** document.getElementById ( ) **
+
+// 설명 : HTML `id` 속성( Attributes )값으로 검색한 요소를 반환해준다.
+//            여러 요소가 검색되면, 가장 먼저 찾은 요소만 반환해준다.
+//            검색 결과가 없으면, `null`을 반환한다.
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.getElementById ( ‘child2’ )
+// console.log( el )                                                   //   < div id = "child2" class="child" >2</div>
+
+
+
+
+
+
+
+// ** document.querySelector ( ) **
+
+// 설명 : ‘CSS 선택자’로 검색한 요소를 하나 반환해준다.
+//            여러 요소가 검색되면, 가장 먼저 찾은 요소만 반환해준다.
+//            검색 결과가 없으면, `null`을 반환한다.
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.querySelector ( ‘ .child:first-child ’ )
+// console.log( el )                                                   //  <div class="child">1</div>
+
+
+
+
+
+
+// ** document.querySelectorAll ( ) **
+
+// 설명 : ‘CSS 선택자’로 검색한 모든 요소를 `NodeList`로 반환해준다.
+//            `NodeList` 객체는 `.forEach`를 사용할 수 있습니다.
+
+// NodeList : node가 여러 개 들어있는 하나의 객체이다.
+         
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const nodeList = document.querySelectorAll ( ‘ .child ’ )
+// console.log( nodeList )                                                        // child클래스가 들어있는 모든 요소를 노드리스트로 출력
+// nodeList.forEach ( el => console.log( el.textContent ) )              // 1 2 순서대로 출력
+
+
+// 예시 ) console.log( Array.from( nodeList ).reverse ( ) )  
+//                             // child클래스가 들어있는 모든 요소를 반전 시켜 노드리스트로 출력
+
+
+
+// 유사 배열 ( array-like ) : 콘솔에 출력된 객체데이터를  배열데이터처럼 만들 때 사용
+
+// Array.from : nodeList에서 forEach 메소드를 제외하고 배열데이터에서 여러 가지 메소드를 쓰고 싶을 때 사용
+
+// .reverse ( ) : 코드 내용을 반전 시킬 때 사용한다.
+
+
+
+
+
+
+
+// ** N.parentElement **
+
+// 설명 : 노드의 부모를 반환해준다.
+         
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.querySelector ( ‘ .child ’ )
+// console.log( el.parentElement )                                      // <div class="parent"> ( child의 부모 태그를 출력 )
+
+
+
+
+
+
+
+
+// ** E.closest 메소드 **
+
+// 설명 : 자신을 포함한 조상 요소 중 ‘CSS 선택자’와 일치하는 가장 가까운 요소를 반환해준다
+//           요소를 찾지 못하면, `null`을 반환한다.
+         
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.querySelector ( ‘ .child ’ )
+
+// console.log( el.closest ( ‘div’ ) )                                         // <div>태그 중 가장 가까운 자기자신이 출력
+// console.log( el.closest ( ‘body’ ) )                                      // <body>태그가 출력
+// console.log( el.closest ( ‘.hello’ ) )                                      // null (hello가 없음)
+
+
+
+
+
+
+
+
+// ** N.previousSibling / N.nextSibling **
+
+// 설명 : 노드의 이전 형제 혹은 다음 형제 노드를 반환해준다.
+//          ( 노드에서만 사용 가능 )
+         
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.querySelector ( ‘ .child ’ )
+// console.log( el.previousSibling )                              //  # text ( 이전 코드에 줄바꿈된 부분이 출력 )
+// console.log( el.nextSibling )                                      // “ 텍스트1 ”
+
+
+
+// previous : 이전을 뜻한다.
+
+
+// next : 다음을 뜻한다.
+
+
+// Sibling : 형제 자매를 뜻한다.
+
+
+
+
+
+
+
+// ** E.previousElementSibling / E.nextElementSibling **
+
+// 설명 : 요소의 이전 형제 혹은 다음 형제 요소를 반환해준다.
+        
+         
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.querySelector ( ‘ .child ’ )
+// console.log( el.previousElementSibling )                              // null  ( 다음이 없음 )
+// console.log( el.nextElementSibling )                                      //  <div id = "child2" class="child">2</div>
+
+
+
+
+
+
+
+// ** E.children **
+
+// 설명 : 요소의 모든 자식 요소를 반환해준다.
+         
+         
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.querySelector ( ‘ .parent ’ )
+// console.log( el.children )                              // parent의 모든 자식 요소들이 출력 
+
+// console.log ( Array.from ( el.children ) )             // 위 코드가 출력 시 객체데이터로 반환되기 때문에 
+//                                                                                               그 유사배열을 배열데이터로 바꿔서 출력함
+
+
+
+
+
+
+// ** E.firstElementChild / E.lastElementChild **
+
+// 설명 : 요소의 첫 번째 자식 혹은 마지막 자식 요소를 반환해준다.
+         
+         
+
+
+
+// <HTML파일>
+//  <div class="parent">
+//         <!-- 주석 -->
+//     <div class="child">1</div>
+//     텍스트1
+//     <div id = "child2" class="child">2</div>
+//     텍스트2
+//     </div>
+
+
+// <JS파일>
+
+// const el = document.querySelector ( ‘ .parent ’ )
+// console.log( el.firstElementChild )                    //  <div class="child">1</div> ( 첫 번째 child부분 출력 )
+// console.log( el.lastElementChild )                             
+//  //  <div id = "child2" class="child">2</div> ( 마지막 child부분 출력 )
+
+
+
 
 
 
