@@ -5328,6 +5328,503 @@
 //  //  <div id = "child2" class="child">2</div> ( 마지막 child부분 출력 )
 
 
+// 동기와 비동기 , 콜백 ( callback) 패턴
+// Primise
+
+
+
+// 동기( Synchronous ) : 순차적으로 코드를 실행해준다.
+
+// 비동기 ( Asynchronous ) : 순차적으로 코드가 실행되지 않는다.( 순서 상관없이 지연시키는 코드 )
+
+
+
+
+// 1번 비동기 코드 예시 
+
+// 설명 : 시간을 지정하여 임의로 지연시켜 출력을 나타내준다.
+
+// console.log( 1 )
+// setTimeout ( ( ) => { console.log( 2 ) }, 1000 ). 
+// console.log( 3 )                //  1 -> 3 -> 2  ( 2번이 1 초 지연된 후 나옴 )
+
+
+
+// 2번 비동기 코드 예시 
+
+// 설명 : 클릭 시 출력이므로 언제 출력 될지 모르기 때문에 비동기에 속한다.
+
+// const btn = document.querySelector( ‘h1’ )
+// btnEl.addEventListener( ‘click’, () => {
+//     console.log( ‘Clicked!’ )                   //  Hello world! 태그를 클릭 시 Clicked! 출력
+// } )
+
+// console.log( ‘Hello world!’ )       //  Hello world! 
+
+
+
+
+
+// 3번 비동기 코드 예시 
+
+// 설명 : 패치코드는 데이터를 전송한 후 응답을 받아야하는데 그시간동안 콜솔 출력이 되고 그 시간이 얼마정도인지 모르므로
+//          비동기에 속한다.
+
+// fetch ( ‘http://www.omdbapi.com/?apikey=7035c60c&s=frozen’ )
+// .then( res => res.json( ) )
+// .then( res => console.log ( res ) )             //  요청을 하고 응답을 받아야한다.
+ 
+// console.log( 1 )
+// console.log( 2 )
+// console.log( 3 )                            //  1 2 3 후에 패치 정보 출력
+
+
+// res : 응답( response )라는 뜻으로 단축해 사용한 것이다.
+
+
+// @ 비동기 코드를 동기적 코드로 변경하는 방법
+
+
+// fetch ( ‘http://www.omdbapi.com/?apikey=7035c60c&s=frozen’ )
+// .then( res => res.json( ) )
+// .then( res => { 
+//  console.log ( res )
+//  console.log ( 1 )
+//  console.log ( 2 )
+//  console.log ( 3 )                            //  한 곳에 순서대로 콘솔을 찍어주면 순서대로 출력이된다.
+//  } )
+
+
+
+// .then :
+
+
+
+
+
+// 콜백 ( callback) 패턴
+
+
+
+
+// ** 콜백 패턴 **
+
+
+
+// const a = ( ) => {
+//   setTimeout( ( ) => {
+//       console.log( 1 )
+//   }, 1000 )
+// }
+// const b = ( ) => console.log( 2 )      
+
+
+// a ( )                                // 1가 지난 후 1이 출력
+// b ( )                                // 2
+
+
+
+
+// @ 콜백 패턴으로 동기적 코드 만들기
+ 
+
+// const a = ( callback ) => {
+//   setTimeout( ( ) => {
+//       console.log( 1 )
+//       callback( )
+//   }, 1000 )
+// }
+// const b = ( callback ) => {
+//     setTimeout( ( ) => {
+//       console.log( 2 )
+//       callback( )
+//   }, 1000 )
+// }
+// const c = ( ) => console.log( 3 )
+
+
+// a ( ( ) => {
+//    b ( ( ) => {
+//         c ( )
+//     } )
+//  } )                                // 1가 지난 후 1, 2, 3이 순서대로 출력
+// 콜백 지옥 : 바로 위 코드처럼 코드가 조금씩 가운데로 들여쓰기 작성되는 모습을 말한다.
+
+      
+// 설명 : a 중괄호 안에 b를 호출하는 코드를 넣어주면 셋타임함수 안에 1초 후 순서대로 콘솔 1이 출력되고 밑에 2가 출력된다.
+//           그대로 c처럼 콜백 지옥을 만들며 이어 쓸 수 있다.
+
+
+
+
+
+// @ 콜백 패턴과 콜백 지옥 예제
+
+
+
+// const getMovies = ( movieName, callback ) => { 
+//   fetch ( ‘http://www.omdbapi.com/?apikey=7035c60c&s=${ movieName }’ )
+//       .then( res => res.json( ) )
+//       .then( res => {
+//           console.log ( res )
+//           callback  ( )                 -> 콜백의 res를 출력 후 매개변수로 받은 ‘겨울왕국!’을 출력하도록 지정
+//     } )
+// }
+
+// getMovies ( ‘frozen’, ( ) => {
+//    console.log( ‘겨울왕국!’ )
+//     getMovies ( ‘avengers’, ( ) => {
+//       console.log( ‘어벤져스!’ )
+//        getMovies ( ‘avatar’, ( ) => {
+//          console.log( ‘아바타!’ )
+//         } ) 
+//     } )
+// } )                                           // 영화 데이터, 문자열 순으로 각 데이터끼리 순서대로 출력 
+
+
+
+
+// ** Promise **
+
+
+
+// @ 기본 콜백 함수 코드
+
+// const a = callback => {
+//   setTimeout ( ( ) => {
+//      console.log( 1 )
+//      callback ( )
+//      }, 1000 )
+//   }
+// const b = ( ) => console.log( 2 )
+
+// a ( ( ) => {
+//    b ( ) 
+// } )                      // 1 2 순서대로 출력
+
+
+
+// @ 위 코드 promise 클래스 함수로 변경
+
+// const a = ( ) => {
+//    return new Promise ( resolve => {
+//       setTimeout ( ( ) => {
+//        console.log( 1 )
+//        resolve ( )
+//       }, 1000 )
+//   })
+// }
+// const b = ( ) => console.log( 2 )
+
+// a ( ). then ( ( ) => { b( )  } )                      // 1 2 순서대로 출력
+
+
+// .then ( ) : promise를 사용할 때 그 데이터를 호출하는 메소드
+
+
+// @ promise 클래스 함수로 변경 2번째
+
+// const a = ( ) => {
+//    return new Promise ( resolve => {
+//       setTimeout ( ( ) => {
+//        console.log( 1 )
+//        resolve ( )
+//       }, 1000 )
+//   })
+// }
+
+// const b = ( ) => {
+//    return new Promise ( resolve => {
+//       setTimeout ( ( ) => {
+//        console.log( 2 )
+//        resolve ( )
+//       }, 1000 )
+//   })
+// }
+
+// const c = ( ) => {
+//    return new Promise ( resolve => {
+//       setTimeout ( ( ) => {
+//        console.log( 3 )
+//        resolve ( )
+//       }, 1000 )
+//   })
+// }
+
+// const c = ( ) => console.log( 4 )
+
+// a ( )
+// .then ( b )
+// .then ( c )
+// .then ( d )
+// .then ( ( ) => console.log ( ‘done’ ) )                                           // 1 2 3 4 done 순서대로 출력
+
+
+// @ 위 영화데이터 코드 Promise 변경 방법
+
+
+// const getMovies = movieName => { 
+//   return new Promise ( resolve => {
+// fetch ( ‘http://www.omdbapi.com/?apikey=7035c60c&s=${ movieName }’ )
+//       .then( res => res.json( ) )
+//       .then( res => {
+//           console.log ( res )
+//           resolve  ( )                 -> 콜백의 res를 출력 후 매개변수로 받은 ‘겨울왕국!’을 출력하도록 지정
+//     } )
+// }
+
+// } )
+ 
+// getMovies ( ‘frozen’ ).then ( ( ) => {
+//    console.log( ‘겨울왕국!’ )
+// return getMovies ( ‘avengers’ )
+// } )
+// getMovies ( ‘avengers’ ).then ( ( ) => {
+//    console.log( ‘어벤져스!’ )
+// return getMovies ( ‘avatar’ )
+// } )
+// .then ( ( ) => {
+//    console.log( ‘아바타!’ )
+// } )                                          // 영화 데이터, 문자열 순으로 각 데이터끼리 순서대로 
+   
+
+
+
+
+// ** Async / Await **
+
+// 설명 : 비동기적 패턴 코드를 더욱 효율적으로 관리할 수 있게 해주는 방법이다.
+//           await 키워드는 프로미스 인스턴스가 반환되는 함수에서만 사용!!
+
+
+
+// const a = ( ) => { 
+//   return new Promise ( resolve => {
+//     setTimeout ( ( ) => {
+//          console.log( 1 )
+//          resolve ( )
+//      }, 1000 )
+//   } )
+// }
+// const b = ( ) => console.log( 2 )      // 1 2 순서대로 출력
+
+// a ( ).then ( ( ) => b ( ) )
+
+
+
+// @ 위 코드 async와 await으로 변경하는 방법
+
+
+// const wrap = async ( ) => {  ——————> await를 사용 시 async을 꼭 붙여줘야 한다.
+// await a ( )    ——————————> a 함수가 호출될때 까지 기다렸다가 호출 후 b함수가 호출된다.
+// b ( )
+//  }
+// wrap( )  ——> 호출 !
+
+
+
+
+
+// @ 위 코드 async와 await으로 변경하는 방법 2번째
+
+
+
+// const getMovies = movieName => { 
+//   return new Promise ( resolve => {
+// fetch ( ‘http://www.omdbapi.com/?apikey=7035c60c&s=${ movieName }’ )
+//       .then( res => res.json( ) )
+//       .then( res => {
+//           console.log ( res )
+//           resolve  ( )                 -> 콜백의 res를 출력 후 매개변수로 받은 ‘겨울왕국!’을 출력하도록 지정
+//     } )
+// }
+
+// } )
+ 
+// getMovies ( ‘frozen’ )
+//    .then ( ( ) => {
+//    console.log( ‘겨울왕국!’ )
+// return getMovies ( ‘avengers’ )
+// } )
+//   .then ( ( ) => {
+//    console.log( ‘어벤져스!’ )
+// return getMovies ( ‘avatar’ )
+// } )
+//   .then ( ( ) => {
+//    console.log( ‘아바타!’ )
+// } )                                          // 영화 데이터, 문자열 순으로 각 데이터끼리 순서대로 출력
+   
+
+
+// @ 위 코드 async와 await으로 변경
+
+
+// const wrap = async ( ) => {
+// await getMovies ( ‘frozen’ )
+// console.log( ‘겨울왕국!’ )
+// await getMovies ( ‘avengers’ )
+// console.log( ‘어벤져스!’ )
+// await getMovies ( ‘avatar’ )
+// console.log( ‘아바타!’ )
+//  }
+// wrap ( )                                         // 영화 데이터, 문자열 순으로 각 데이터끼리 순서대로 출력
+
+
+
+
+
+// ** Resolve, Reject ( 매개변수 )그리고 에러 핸들링 **
+
+// 에러핸들링: Resolve와 Reject를 통해서 여러가지 예외 상황들을 처리하는 것을 의미한다.
+
+
+// const delayAdd = ( index, cb, errorCb ) => {
+//    setTimeout ( ( ) => {
+//       if ( index > 10 ) {
+//       errorCb( ‘${ index }는 10보다 클 수 없습니다. ’ )
+//       return  -> 함수 종료
+//     }
+//     console.log( index )
+//     cb( index + 1 )
+//    }, 1000 )
+// }
+
+// delayAdd (
+// 4,
+// res => console.log ( res ),  -> 정상적으로 로직이 동작하면 출력
+// err => console.error ( err )  -> 정상적인 처리가 안되서 에러가 생길 시 출력                      //  4 5 순서대로 출력
+// )
+
+
+
+// @ 위 코드 Resolve와 Reject로 변경하는 방법과 에러 핸들링 하는 방법
+
+
+
+// const delayAdd = ( index ) => {
+//    return new Promise ( ( resolve, reject ) => {
+//      setTimeout ( ( ) => {
+//       if ( index > 10 ) {
+//       reject( ‘${ index }는 10보다 클 수 없습니다. ’ )  -> 정상적인 동작이 되지 않을 때의 코드
+//       return  -> 함수 종료
+//     }
+//     console.log( index )
+//     resolve ( index + 1 )  -> 정상적인 로직이 동작할 때의 코드
+//    }, 1000 )
+//    } ) 
+// }
+
+// @ 위 코드  then과 catch로 에러핸들링 하는 방법
+
+// delayAdd ( 12 )
+//    .then ( res => console.log ( res ) )  -> 정상적으로 로직이 동작하면 출력
+//    .catch ( err => console.error ( err ) )  -> 정상적인 처리가 안되서 에러 생길 시 출력 //12는 10보다 클 수 없습니다.
+//    .finally ( ( ) => console.log( ‘Done!!’ ) )
+
+
+
+
+// @ 위 코드  async와 await으로 변경하며 에러핸들링 하는 방법
+//     또 try와 catch로 에러핸들링 하는방법
+
+
+// const wrap = async ( ) => {
+//   try {
+//  const res = await delayAdd ( 12 )
+//     console.log ( res )
+//     } catch ( err ) {
+//     console.error ( err )
+//     } finally {
+//     console.log ( ‘Done!!’ )  -> 에러가 나도 무조건 출력해준다.
+//     }
+//  }
+// wrap ( )
+//                    //  12는 10보다 클 수 없습니다.
+
+
+
+
+
+
+// ** Resolve, Reject ( 매개변수 )그리고 에러 핸들링 2 **
+
+
+
+
+// ** 반복문에서 비동기 처리  **
+
+
+// const getMovies = movieName ( ) => {
+//   return new Promise ( resolve => {
+//     fetch ( ‘http://www.omdbapi.com/?apikey=7035c60c&s=${ movieName }’ )
+//         .then ( res => res.json( ) )
+//         .then ( res => resolve ( res ) )
+//    } )
+// }
+
+// const title = [ ‘frozen’, ‘avengers’, ‘avatar’ ]
+
+// titles.forEach( async title => {
+//     const movies = await getMovies ( title )
+//     console.log( title, movies )
+// })                                                                  // ‘frozen’, ‘avengers’, ‘avatar’ 가 데이터가 도착하는 대로 출력( 랜덤 )
+
+
+// @ 위 코드 for 문으로 작성하는 법
+
+// const wrap = async ( ) => {
+// for ( const title of titles ) {
+//    const movies = await getMovies ( title )
+//    console.log( title, movies )
+//     }
+//  }
+// wrap ( )                                          // ‘frozen’, ‘avengers’, ‘avatar’ 가 작성한 순서대로 출력
+
+
+
+
+
+// ** fetch ( 주소, 옵션 )  **
+
+// 설명 : 네트워크를 통해 리소스의 요청( Request ) 및 응답( Response )을 처리 할 수 있다.
+//           Promise 인스턴스를 반환해준다.
+
+
+// fetch ( ‘http://www.omdbapi.com/?apikey=7035c60c&s=avengers’ , { 
+//    method: ‘GET’,  -> 어떤 값을 얻어내는 메소드( POST, PUT,  DELETE 도 작성 가능 )
+//    headers: { 
+//     ‘Content-Type’ : ‘application / json’    -> 페이지에 대한 정보를 명시하는 곳
+// },
+//    body: JSON.stringify( {                       -> 페이지의 구조를 명시하는 곳
+//      name: ‘HEROPY’,
+//      age: 85,
+//      email: asdadad@gmail.com
+//       } )
+// } )  
+// .then ( res => res.json( ) )
+// .then ( json => console.log( json( ) )
+
+//    // avengers에 관한 모든 데이터들을 출력
+
+
+// @ 위 코드  async와 await으로 변경 방법
+
+
+// const wrap = async ( ) => {
+// const res = await fetch ( ‘http://www.omdbapi.com/?apikey=7035c60c&s=avengers’ ) 
+// const json = await res.json( )
+// Console.log( json )
+// }
+// wrap ( )   
+
+//    // avengers에 관한 모든 데이터들을 출력
+
+
+// Content-Type : 서버로 전송되는 내용의 type이 무엇인지 지정할 수 있는 속성
+
+// application / json : json이라는 데이터의 포맷으로 통신을 할 수가 있다는 뜻
+
+// stringify : 인수로 들어온 자바스크립트 데이터를 전부 다 문자화시킬 수 있는 기능을 가지고 있다.
 
 
 
